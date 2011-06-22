@@ -1,0 +1,42 @@
+<!DOCTYPE html>   
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<style type="text/css">
+		
+		#elephant{position: absolute; width: 100px; height: 10px; left: 200px; top: 200px; background-color: green; }
+	
+		#tiger{position: absolute; width: 100px; height: 10px; left: 300px; top: 200px; background-color: orange; }
+	</style>
+</head>
+<!-- !Body -->
+<body>
+	<div id="container">
+		<header>
+
+		</header>
+		
+		<section id="main">
+		
+			<div id="elephant"></div>
+			<div id="tiger"></div>
+		
+		</section><!-- /main -->
+		
+		<footer>
+		
+		</footer><!-- /footer -->
+	</div><!--!/#container -->
+	<script src="matrices.js"></script>
+	<script type="text/javascript">
+	
+	var deg = 0;
+	setInterval(function(){
+		deg++;
+		r(document.getElementById("elephant"), deg, "z");
+		rMatrix(document.getElementById("tiger"), deg, "z");
+	}, 2);
+	</script>
+</body>
+</html>

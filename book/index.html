@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="basecard-fb.css" type="text/css" charset="utf-8" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color: transparent;}
+/* End Medialets Reset CSS */
+
+/* size control style rules */
+body {background-color: #333; font-family: Helvetica, Arial;}
+
+#container, .portrait #container, .portrait-180 #container {overflow:hidden;position:absolute;height:968px;width:768px;}
+.landscape-right #container, .landscape-left #container {height:712px;width:1024px;}
+
+#content{overflow:hidden;position:absolute;width:1024px;height:968px;left:-128px;top:0;}
+.landscape-right #content, .landscape-left #content{left:0;top:-128px;}
+
+#wrapper{position:absolute; left: 128px;}
+	
+		#mainContainer{width: 100%; height: 100%; -webkit-background-clip: border; z-index: 1; position: absolute;}
+
+    #panel{position: absolute; height: 700px; width: 670px; overflow: hidden;}
+    			
+	#front{z-index: 500px;}
+
+	#frontCover{width: 300px; height: 400px; position: absolute; left: 85px; top: 150px; background-color: aqua;}
+	#backCover{width: 300px; height: 400px; position: absolute; left: 385px; top: 150px; background-color: fuchsia;}
+	
+	.card{width: 300px; height: 400px; 
+	 position: absolute; left: 385px; top: 150px; 
+	 -webkit-backface-visibility: hidden; 
+	 -webkit-transition-duration: 1000ms; 
+	 -webkit-transition-delay: 1000ms;
+	 -webkit-transform-origin: left top; 
+	 opacity: 0.8;}
+		
+		#card-1{}
+		#card-1 .front{background: red;}
+		#card-1 .back{background: blue;}	
+
+		#card-2{}
+		#card-2 .front{background: green;}
+		#card-2 .back{background: yellow;}	
+		
+		#card-3{}
+		#card-3 .front{background: red;}
+		#card-3 .back{background: blue;}	
+		
+		#card-4{}
+		#card-4 .front{background: green;}
+		#card-4 .back{background: yellow;}	
+				
+
+
+	.card.flipped{
+		-webkit-transform: rotateY(-180deg); 
+	}
+	
+	.card.finished{
+
+	}
+			
+</style>
+
+
+</head>
+<body class="portrait">
+		<div id="container">
+
+			<div id="content">
+			
+				<div id="wrapper">
+					<section id="mainContainer" class="container">
+				
+				<div id="perspectiveContainer">
+					<div id="frontCover"></div>
+					<div id="backCover"></div>
+		
+					<div id="card-4" class="card">
+						<figure class="front"></figure>
+						<figure class="back"></figure>
+					</div>	
+							
+					<div id="card-3" class="card">
+						<figure class="front"></figure>
+						<figure class="back"></figure>
+					</div>		
+				
+					<div id="card-2" class="card">
+						<figure class="front"></figure>
+						<figure class="back"></figure>
+					</div>	
+					
+					<div id="card-1" class="card">
+						<figure class="front"></figure>
+						<figure class="back"></figure>
+					</div>	
+					
+				</div>
+					
+							  
+					</section><!--/mainContainer-->
+				
+				</div><!--/wrapper-->
+			
+			
+			</div><!--/content-->
+		
+
+		
+		</div><!--/container-->
+
+
+<script src="mmbridge.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+var $card1 = document.getElementById('card-1'),
+	$card2 = document.getElementById('card-2'),
+	$card3 = document.getElementById('card-3'),
+	$card4 = document.getElementById('card-4'),
+	$card5 = document.getElementById('card-5');
+	
+		setTimeout(function(){$card1.className = 'card flipped';}, 1000);
+		$card1.addEventListener('webkitTransitionEnd',function(){
+			$card1.style.webkitTransform = 'rotateY(-180deg) translate3d(0,0,1px)';
+			$card2.className = 'card flipped';
+			$card2.addEventListener('webkitTransitionEnd',function(){
+				$card2.style.webkitTransform = 'rotateY(-180deg) translate3d(0,0,1px)';
+				$card3.className = 'card flipped';
+				$card3.addEventListener('webkitTransitionEnd',function(){
+					$card3.style.webkitTransform = 'rotateY(-180deg) translate3d(0,0,1px)';
+					$card4.className = 'card flipped';
+					//$card4.addEventListener('webkitTransitionEnd',function(){
+						//$card3.style.webkitTransform = 'rotateY(-180deg) translate3d(0,0,1px)';
+					//});
+				});
+			});
+		});
+
+</script>
+
+</body>
+</html>

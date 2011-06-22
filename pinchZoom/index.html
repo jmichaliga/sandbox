@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1024x768</title>
+<meta name="viewport" content="width=1024,height=768,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}
+/* END Medialets Reset CSS */
+    #box {position: absolute;top: 100px;left: 100px;padding: 30px;font-family: Arial;background: pink;
+  	border: 1px solid purple;-webkit-border-radius: 5px;}
+</style>
+</head>
+<body>
+    <div id="container">
+  <div id="box">scale<br />rotate</div> 
+	</div><!--/container-->
+<script src="mmbridge.js" type="text/javascript" charset="utf-8"></script>
+<script src="medialets.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+document.addEventListener('DOMContentLoaded', function() {
+      var b = document.getElementById('box'),
+          bstyle = b.style;
+      b.addEventListener('gesturechange', function(event) {
+          event.preventDefault();
+          bstyle.webkitTransform = 'scale(' + event.scale + ') ' + 'rotate('+ event.rotation +'deg)';
+      }, false);
+}, false);
+</script>
+</body>
+</html>
+

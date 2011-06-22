@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1024x768</title>
+<meta name="viewport" content="width=1024,height=768,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}
+/* END Medialets Reset CSS */
+
+</style>
+</head>
+
+<body onload="webGLStart();"> 
+
+    <div id="container">
+  		<canvas id="lesson01-canvas" style="border: none;" width="500" height="500"></canvas> 
+	</div>
+	<!--/container-->
+
+<script src="build/PhiloGL.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+function webGLStart() {
+  PhiloGL('lesson01-canvas', {
+    program: {
+      from: 'ids',
+      vs: 'shader-vs',
+      fs: 'shader-fs'
+    },
+    onError: function() {
+      alert("An error ocurred while loading the application");
+    },
+    onLoad: function(app) {
+      var gl = app.gl,
+          canvas = app.canvas,
+          program = app.program,
+          camera = app.camera;
+
+	      gl.viewport(0, 0, canvas.width, canvas.height);
+	      gl.clearColor(0, 0, 0, 1);
+	      gl.clearDepth(1);
+	      gl.enable(gl.DEPTH_TEST);
+	      gl.depthFunc(gl.LEQUAL);
+
+      program.setBuffers({
+        'triangle': {
+          attribute: 'aVertexPosition',
+          value: new Float32Array([0, 1, 0, -1, -1, 0, 1, -1, 0]),
+          size: 3
+        },
+        
+        'square': {
+          attribute: 'aVertexPosition',
+          value: new Float32Array([1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0]),
+          size: 3
+        }
+      });
+      
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      camera.modelView.id();
+      //Draw Triangle
+      camera.modelView.$translate(-1.5, 0, -7);
+      program.setUniform('uMVMatrix', camera.modelView);
+      program.setUniform('uPMatrix', camera.projection);
+      program.setBuffer('triangle');
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      
+      //Draw Square
+      camera.modelView.$translate(3, 0, 0);
+      program.setUniform('uMVMatrix', camera.modelView);
+      program.setUniform('uPMatrix', camera.projection);
+      program.setBuffer('square');
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+  });  
+}
+</script>
+  
+<script id="shader-fs" type="x-shader/x-fragment"> 
+  #ifdef GL_ES
+  precision highp float;
+  #endif
+ 
+  void main(void) {
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+  }
+</script> 
+ 
+<script id="shader-vs" type="x-shader/x-vertex"> 
+  attribute vec3 aVertexPosition;
+ 
+  uniform mat4 uMVMatrix;
+  uniform mat4 uPMatrix;
+ 
+  void main(void) {
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+  }
+</script> 
+
+</body>
+</html>

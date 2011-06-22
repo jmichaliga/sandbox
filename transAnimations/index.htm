@@ -1,0 +1,166 @@
+<!DOCTYPE html>   
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=1024,height=768,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<style type="text/css">
+#perspectiveContainer{
+      -webkit-perspective: 1000;
+}
+.card {
+	   background-color: transparent;
+      -webkit-transition: -webkit-transform 1s;
+      -webkit-transform-style: preserve-3d;
+}
+.card.flipped{
+      -webkit-transform: rotateY( 180deg ) rotateZ( 0deg );
+}
+
+.card {
+	position: absolute; height: 400px; width: 300px; border: 5px solid #CCC;
+	border-radius: 5px;
+	-webkit-transition-property: width;
+    -webkit-transition: -webkit-transform 1s;
+    -webkit-transform-style: preserve-3d;
+}
+
+.card figure{
+	  -webkit-backface-visibility: hidden;
+	  height: 100%; width: 100%; position: absolute;
+}
+
+.card .front{
+	background-color: red;
+}
+.card .back{
+	 background-color: aqua;
+      -webkit-transform: rotateY( 180deg );
+}
+
+
+/* Cards.css */
+#card-1{
+	  left: 100px; top: 200px; -webkit-transform: rotateZ(5deg);
+	  -webkit-transition: -webkit-transform 1s;
+      -webkit-transform-style: preserve-3d;
+      background-color: aqua;
+}
+
+/* CardAnimations.css */
+#card-1.flipped{
+      -webkit-transform: rotateY( 180deg ) rotateZ( 0deg ) translateZ(-10px);
+}
+
+#card-1.card.contracted{
+	width: 300px;
+}
+#card-1.card.expanded{
+	width: 600px;
+}
+
+@-webkit-keyframes flipcard-1{
+	0%{-webkit-transform: rotateZ( -2deg ) translateZ(9px) scale3d(0.675, 0.675, 1); width: 278px;}
+	50%{-webkit-transform: translate3d(200px, 200px, 9px);}
+	75%{-webkit-transform: translate3d(40px, 0px, 400px) scale3d(0.5, 0.5, 1);}
+	100%{-webkit-transform: rotateY( 180deg )  rotateZ( 0deg ) translate3d(0px, 0px, -20px) scale3d(1.0, 1.0, 1); width: 278px;
+		left: 207px; top: 140px;}
+}
+
+@-webkit-keyframes putBackcard-1{
+	0%{-webkit-transform: rotateY( 180deg )  rotateZ( 0deg ) translate3d(62px, -217px, -20px) scale3d(1, 1, 1);}
+	50%{-webkit-transform: rotateY( 180deg )  rotateZ( 5deg ) translate3d(0px, -200px, -400px) scale3d(0.5, 0.5, 1);}
+	75%{-webkit-transform: rotateY( 180deg )  translate3d(-200px, 200px, 21px);}
+	100%{-webkit-transform: rotateY( 180deg )  rotateZ( -2deg ) translate3d(0px, 0px, -9px) scale3d(0.675, 0.675, 1);}
+}
+
+@-webkit-keyframes bringForthcard-1{
+	0%{-webkit-transform: rotateY( 180deg )  rotateZ( -2deg ) translateZ(9px) scale3d(0.675, 0.675, 1);}
+	50%{-webkit-transform: rotateY( 180deg )  translate3d(-200px, 200px, 9px) scale3d(0.675, 0.675, 1);}
+	75%{-webkit-transform: rotateY( 180deg )  translate3d(0px, 0px, -400px) scale3d(0.5, 0.5, 1);}
+	100%{-webkit-transform: rotateY( 180deg )  rotateZ( 0deg ) translate3d(230px, -218px, -20px) scale3d(1.0, 1.0, 1); width: 278px;}
+}
+
+#card-1.card.flipped{
+    	-webkit-animation-name: flipcard-1; 
+    	-webkit-animation-duration: 2000ms; 
+    	-webkit-animation-fill-mode: forwards;
+}
+
+#card-1.card.putBack{
+    	-webkit-animation-name: putBackcard-1; 
+    	-webkit-animation-duration: 2000ms; 
+    	-webkit-animation-fill-mode: forwards;
+}
+
+#card-1.card.bringForth{
+    	-webkit-animation-name: bringForthcard-1; 
+    	-webkit-animation-duration: 2000ms; 
+    	-webkit-animation-fill-mode: forwards;
+}
+
+#card-1.card.collapsed{
+    	-webkit-animation-name: colCard; 
+    	-webkit-animation-duration: 1s; 
+    	-webkit-animation-fill-mode: forwards;
+}
+
+#card-1.card.expanded{
+    	-webkit-animation-name: expandCard; 
+    	-webkit-animation-duration: 1s; 
+    	-webkit-animation-fill-mode: forwards;
+}
+
+#card-1.card.liked{
+    	-webkit-animation-name: flipActiveCard; 
+    	-webkit-animation-duration: 1500ms; 
+    	-webkit-animation-fill-mode: forwards;
+}
+
+#card-1.card.submitted{
+    	-webkit-animation-name: flipActiveForm; 
+    	-webkit-animation-duration: 1500ms; 
+    	-webkit-animation-fill-mode: forwards;
+}</style>
+
+</head>
+<body class="landscape-left">
+	<div id="container">	
+	
+		<section id="main">
+	
+			<div id="perspectiveContainer">
+			
+				<div id="table">
+			<div id="card-1" class="card">
+				<figure class="front"></figure>
+				<figure class="back"></figure>
+			</div>
+				</div><!--/table-->	
+						
+			</div><!--/perspectiveContainer-->
+		<div id="overlayTint"></div>
+		</section><!-- /main -->
+		
+		
+		<footer>
+			<div id="message"></div>
+			<button id="downloadApp" class="gold awesome">Download App</button>
+		</footer><!-- /footer -->
+		
+	</div><!--!/#container -->
+	
+	<script src="js/medialets.min.js" type="text/javascript"></script>
+	<script src="js/medialets.autoOrientation.min.js" type="text/javascript"></script>
+	<script src="js/medialets.confirmAppExit.min.js" type="text/javascript"></script>
+	<script src="js/medialets.touch.min.js" type="text/javascript"></script>
+	<script src="js/main.js" type="text/javascript"></script>
+	<script src="js/form.js" type="text/javascript"></script>	
+	
+<script type="text/javascript">
+	var dJSON = document.createElement('script');
+	dJSON.src = (navigator.onLine ? 'http://px.cdn.creative.medialytics.com/ads/gilt/cardData_Week1.js' : 'js/cardData_Week1.js');
+	document.getElementsByTagName("head")[0].appendChild(dJSON);
+  
+</script>
+</body>
+</html>

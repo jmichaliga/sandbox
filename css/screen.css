@@ -1,0 +1,8 @@
+body{background-color: #DDD;}
+#container{margin: 20px auto; width: 600px;}
+
+
+#scrollable { border: 1px solid #CCC; width: 450px; height: 450px; background-color: #EEE; overflow: hidden;}
+	.element{ float: left; margin: 20px 0 0 20px; width: 410px; height: 50px; border: 1px solid #CCC; background-color: #FFF; }
+
+	

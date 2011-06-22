@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1024x768</title>
+<meta name="viewport" content="width=1024,height=768,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}
+/* END Medialets Reset CSS */
+
+
+#container{position: absolute; font-size: 3em; width: 1024px; height: 768px;}
+	#local{color: aqua; position: absolute; left: 0;}
+	#session{color: fuchsia; position: absolute; top: 10px; left: 10px;}
+	#global{color: green; position: absolute; top: 20px; left: 20px;}
+h1{position: absolute; float: right; opacity: 0.2;}
+</style>
+</head>
+
+<body>
+    <div id="container">
+		<h1 id="title">Expandable</h1>
+		<div id="local"></div>
+		<div id="session"></div>
+		<div id="global"></div>
+	</div>
+	<!--/container-->
+
+<script src="mmbridge.js" type="text/javascript" charset="utf-8"></script>
+<script src="medialets.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" charset="utf-8">
+document.addEventListener('DOMContentLoaded', function() {
+
+	sessionStorage.setItem("sName", "SAM");
+	localStorage.setItem("lName", "JUSTIN");
+	//globalStorage[''].foo = 'BAR';  
+
+	$m('session').innerHTML = sessionStorage.getItem("sName");
+	$m('local').innerHTML = localStorage.getItem("lName");
+	//$m('global').innerHTML = globalStorage[''].foo;
+
+	// prevent the viewport from moving on touch/drag
+	$m.bind(document, 'touchmove', function(e) { e.preventDefault(); });
+}, false);
+</script>
+  
+</body>
+</html>

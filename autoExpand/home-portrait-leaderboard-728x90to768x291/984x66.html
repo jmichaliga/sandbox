@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=984,height=66,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" /><!-- !important! -->
+<script src="mmbridge.js" type="text/javascript" charset="utf-8"></script><!-- !important! -->
+<script src="js/medialets.min.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+
+/* Medialets Reset CSS */
+*{margin:0;padding:0;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+
+
+/* box that contains everything in the ad */
+#container {
+  position:absolute;
+  width:984px;
+  height:66px;
+  overflow:hidden;
+}
+
+</style>
+</head>
+<body>
+<div id="container">
+    
+    <!-- INSERT AD-SPECIFIC HTML ELEMENTS HERE -->
+    
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+window.addEventListener('load', function() {
+  
+  /****************************/
+  /* 1. VARIABLE DECLARATIONS */
+  /****************************/
+  
+  /* CREATE JS VARIABLES */
+  var $d = $m('document'),
+      $c = $m('container');
+      $now = new Date(),
+      $autoExpandLimit = 6000 * 6000 * 2, // 2 hours
+      $lastAutoExpandTimestamp = localStorage.getItem('FOXNEWSHOMELEADERBOARDS_lastAutoExpandTimestamp'); // may be null
+  
+  
+  /****************************/
+  /* 2. FUNCTION DECLARATIONS */
+  /****************************/
+  
+  /* INSERT AD-SPECIFIC JAVASCRIPT FUNCTION DECLARATIONS HERE (OPTIONAL) */
+  
+  // function called to autoExpand the ad. Never invoked if $autoExpandLimit has not elapsed
+  var autoExpand = function () {
+    // set a value localStorage that indicates ad autoExpanded
+    // this value can then be used (or not) to affect the display of the expanded HTML file
+    localStorage.setItem('FOXNEWSHOMELEADERBOARDS_lastAutoExpandTimestamp', $now);
+    localStorage.setItem('$$_ADID_$$_expandType','auto');
+    try { MMBridge.expandAd() } catch(e) { console.log('MMBridge.expandAd() was invoked from autoExpand() function'); }
+  };
+  
+  // function called to manually expand the ad.
+  var manualExpand = function () {
+    // set a value localStorage that indicates the user manually expanded the ad by tapping this banner
+    // this value can then be used (or not) to affect the display of the expanded HTML file
+    localStorage.setItem('$$_ADID_$$_expandType','manual');
+    try { MMBridge.expandAd() } catch(e) { console.log('MMBridge.expandAd() was invoked from manualExpand() function'); }
+  };
+  
+  // always invoked. Tests if ad should autoExpand() per below logic
+  var tryToAutoExpand = function () {
+    // if ad has never autoExpanded before or autoExpand happened longer ago than $autoExpandLimit
+    if ( $lastAutoExpandTimestamp == null || ($now - new Date($lastAutoExpandTimestamp) > $autoExpandLimit) ) {
+      console.log('autoExpand() invoked');
+      autoExpand();
+    } else {
+      console.log('autoExpand() not invoked because value of $lastAutoExpandTimestamp < $autoExpandLimit');
+    }
+  }
+  
+  
+  
+  /****************************/
+  /* 3. ATTACH EVENT HANDLERS */
+  /****************************/
+  
+  /* INSERT YOUR AD-SPECIFIC EVENT HANDLERS HERE (OPTIONAL) */
+  
+  tryToAutoExpand();
+  
+  
+  
+  
+  /******************************/
+  /* 4. REQUIRED EVENT HANDLERS */
+  /******************************/
+  
+  /* MAKE AD EXPAND WHEN TAPPED ANYWHERE */
+  /* NOTE: If the entire banner should not tap to expand for some reason, then the below line can be commented out. */
+  $m.bind($c, $m.ui.tap, function() { manualExpand(); });
+  
+  /* PREVENT DRAG-SCROLLING WITHIN THE AD */
+  $m.bind($d, 'touchmove', function(e) { e.preventDefault(); });
+  
+}, false);
+
+</script>
+
+</body>
+</html>

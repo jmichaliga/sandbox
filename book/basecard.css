@@ -1,0 +1,8 @@
+#perspectiveContainer{
+      -webkit-perspective: 1000;
+}
+.card {
+	   background-color: transparent;
+      -webkit-transition: -webkit-transform 1500ms;
+      -webkit-transform-style: preserve-3d;
+}

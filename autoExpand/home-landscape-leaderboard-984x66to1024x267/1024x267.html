@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1024x267 Expanded AdView</title>
+<meta name="viewport" content="width=1024,height=267,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" /><!-- !important! -->
+<script src="mmbridge.js" type="text/javascript" charset="utf-8"></script><!-- !important! -->
+<script src="js/medialets.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/medialets.autoDismiss.min.js" type="text/javascript" charset="utf-8"></script>
+
+<style type="text/css">
+
+/* Medialets Reset CSS */
+*{margin:0;padding:0;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+
+/* Dismiss Button CSS */
+#dismissButton{position:absolute;width:44px;height:44px;top:0;right:0;background:transparent url('dismissButton.png') no-repeat 0 0;}
+
+/* Orientation CSS */
+#container{width:1024px;height:267px;position:absolute;top:0;left:0;overflow:hidden;}
+
+/* INSERT AD-SPECIFIC CSS RULES BELOW THIS LINE */
+
+
+
+
+</style>
+</head>
+<body>
+<div id="container">
+    
+    <!-- INSERT AD-SPECIFIC HTML ELEMENTS HERE -->
+    
+    <!-- THIS ELEMENT CAN BE DELETED IN PRODUCTION -->
+    <p id="expandTypeMessage"></p>
+    
+    <!-- dismiss button (required) -->
+    <div id="dismissButton"></div>
+    
+</div>
+
+<script type="text/javascript">
+
+window.addEventListener('load', function() {
+  
+  /****************************/
+  /* 1. VARIABLE DECLARATIONS */
+  /****************************/
+  
+  /* CREATE JS VARIABLES */
+  var $d = document,
+      $c = $m('container'),
+      $dismissButton = $m('dismissButton'),
+      $expandType = localStorage.getItem('$$_ADID_$$_expandType'),
+      $autoDismissTimer = 3000; // how long should auto-expand creative be visible before auto-dismiss
+      autoDismiss = 0;
+      /* INSERT AD-SPECIFIC VARIABLE DECLARATIONS HERE */
+      
+  var $expandTypeMessage = $m('expandTypeMessage');
+      
+      
+      
+      
+      
+  /****************************/
+  /* 2. FUNCTION DECLARATIONS */
+  /****************************/
+  
+  /* INSERT AD-SPECIFIC JAVASCRIPT FUNCTION DECLARATIONS HERE (OPTIONAL) */
+  
+  
+  
+  
+  
+  // this function will be invoked if the ad auto-expanded.
+  showAutoExpandCreative = function() {
+    
+    // BELOW LINE FOR TESTING ONLY. DELETE OR COMMENT OUT IN A PRODUCTION AD.
+    $expandTypeMessage.innerHTML = 'The ad auto-expanded and will auto-dismiss in ' + $autoDismissTimer + 'ms if not touched.';
+    
+  }
+  
+  
+  
+  
+  // this function will be invoked if the ad was manually-expanded.
+  showManualExpandCreative = function() {
+    
+    // BELOW LINE FOR TESTING ONLY. DELETE OR COMMENT OUT IN A PRODUCTION AD.
+    $expandTypeMessage.innerHTML = 'The ad was manually-expanded and will not autoDismiss.';
+    
+  }
+  
+  
+  // function that checks what the expand type was. always invoked when ad loads.
+  testExpandType = function() {
+    if ($expandType == 'auto') {
+      showAutoExpandCreative();
+      
+      // autoDismiss magic
+      autoDismiss = new $m.autoDismiss({
+        $cancelElements: $c,
+        $dismissElements: $dismissButton,
+        $time: $autoDismissTimer + 500 // padded by 500ms to allow DOM to render creative
+      });
+      
+    } else {
+      if ($expandType == 'manual') {
+        showManualExpandCreative();
+      } else {
+        console.log('The type of expansion ("manual" or "auto") is not specified.');
+      }
+    }
+  }
+  testExpandType();
+  
+  /****************************/
+  /* 3. ATTACH EVENT HANDLERS */
+  /****************************/
+  
+  /* INSERT YOUR AD-SPECIFIC EVENT HANDLERS HERE (OPTIONAL) */
+  
+  
+  
+  
+  
+  
+  /******************************/
+  /* 4. REQUIRED EVENT HANDLERS */
+  /******************************/
+  
+  /* ATTACH EVENT HANDLER TO DISMISS BUTTON */
+  $m.bind($dismissButton, $m.ui.tap, function() { try { MMBridge.dismissAd(); } catch(err){ console.log('Tap was registered. Ad will dismiss when viewed on device.'); } });
+  
+  /* PREVENT DRAG-SCROLLING WITHIN THE AD */
+  $m.bind($d, 'touchmove', function(e) { e.preventDefault(); });
+
+}, false); // end window.load
+
+</script>
+</body>
+</html>

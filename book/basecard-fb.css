@@ -1,0 +1,11 @@
+@import url("basecard.css");
+
+.card figure{
+	  -webkit-backface-visibility: hidden; 
+	  height: 100%; width: 100%; position: absolute;
+}
+
+
+.card .back{
+      -webkit-transform: rotateY( 180deg ); 
+}

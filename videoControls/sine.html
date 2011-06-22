@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+<link href="http://www.jmichaliga.com/css/screen.css" media="screen" rel="stylesheet" type="text/css"/>
+</head>
+<body onload="init();">
+<div style="width: 500px; margin: 0 auto">
+	<div style="width: 500px; float: left;">
+		<input id="ranger" type="range" min="-2" max="2" step="0.01" value="0">
+		<label id="amount" for="amount">Speed:</label>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	var N = 20;
+	var n = 20;
+	var A = 0;
+	var B = 1;
+	var val = 0;
+	var first = 0;
+	var timer;
+	var slider = document.getElementById("ranger");
+	
+	function line(n){
+		if(!n && first=='0'){first = 1; n = N;}
+		
+		if(n && n>1){
+			v = ((n-N) / N);
+			v = v * v; 
+			X = (A * v) + (B * (1 - v));
+		  	val = 2 - X;
+		  	console.log("Line: "+val);
+		  	n = n - 1;
+		}
+		else {
+			console.log("Line: 2");
+			clearInterval(timer);
+			val = 2;
+			return 2;
+		}
+		slider.value = val;
+	}
+ 
+    function init(){timer = setInterval("line(n--)", 200);};
+    
+</script>

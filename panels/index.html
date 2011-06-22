@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1024x768</title>
+<meta name="viewport" content="width=1024,height=768,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none; -webkit-tap-highlight-color: rgba(0,0,0,0);}
+/* END Medialets Reset CSS */
+body{background-color: #f7f7f7;}
+
+/*Orientation Code */
+#container{height:1024px;overflow:hidden;position:absolute;width:768px;}
+.landscape-right #container{-webkit-transform:rotate(90deg) translate3d(128px,128px,0);-webkit-transform-origin:50% 50%;height:768px;width:1024px;}
+.landscape-left #container{-webkit-transform:rotate(-90deg) translate3d(-128px,-128px,0); -webkit-transform-origin:50% 50%;height:768px;width:1024px}
+.portrait-180 #container{-webkit-transform:rotate(180deg);-webkit-transform-origin:50% 50%;height:1024px;width:768px}
+
+#content{overflow:hidden;position:absolute;width:1024px;height:968px;left:-128px;top:0;background:#fff url('banner_assets/bg.jpg') no-repeat 0 0;}
+.landscape-right #content, .landscape-left #content{left:0;top:-128px;background:#fff url('banner_assets/bg.jpg') no-repeat 0 0;}
+
+#wrapper{top: 0px; left: 128px; position: relative;}
+.landscape-right #wrapper, .landscape-left #wrapper{top: 128px; left: 0px;}
+
+/* Videos */
+	#vgGallery{position: absolute; left: 0px; top: 0px; width: 979px; height: 411px; -webkit-perspective: 1000;}
+
+	.videoPanel{position: absolute; width:540px; height: 303px; left: 222px; top: 38px;
+		-webkit-transform: translate3d(-0px, 0, 0); -webkit-transition-duration: 1000ms;
+		background-color: rgba(0,0,0,1); opacity: 0.8; border: 3px solid #FFF; border-radius: 3px; 
+		-webkit-box-shadow: rgba(0,0,0,0.5) 0px 0px 10px;}
+		 
+		.videoPanel.active{-webkit-transform: translate3d(0px, 0, 10px); -webkit-transition-delay: 550ms; opacity: 1;}	
+		.videoPanel.next-left{-webkit-transform: translate3d(-230px, 10px, 5px) scale(.55); -webkit-transition-delay: 200ms;}
+		.videoPanel.away-left{-webkit-transform: translate3d(-370px, 20px, 0) scale(.3);}	
+		.videoPanel.next-right{-webkit-transform: translate3d(230px, 10px, 5px) scale(.55); -webkit-transition-delay: 200ms;}
+		.videoPanel.away-right{-webkit-transform: translate3d(370px, 20px, 0) scale(.3);}	
+
+</style>
+</head>
+
+<body class="portrait">
+    <div id="container">
+			
+			<div id="videoGalleryPanel">
+				<div id="vgGallery">
+					<div id="video-1" data-video="http://cdn.creative.medialytics.com/ads/lexus/ct200h/bbc-ipad/june-2011/assets/video/CT-200h-30.m4v" class="videoPanel away-left"></div>
+					<div id="video-2"  data-video="http://cdn.creative.medialytics.com/ads/lexus/ct200h/bbc-ipad/june-2011/assets/video/lexus-final.m4v" class="videoPanel next-left"></div>
+					<div id="video-3" data-video="http://cdn.creative.medialytics.com/ads/lexus/ct200h/bbc-ipad/june-2011/assets/video/CT-200h-30.m4v" class="videoPanel active"></div>
+					<div id="video-4" data-video="http://cdn.creative.medialytics.com/ads/lexus/ct200h/bbc-ipad/june-2011/assets/video/lexus-final.m4v" class="videoPanel next-right"></div>
+					<div id="video-5" data-video="http://cdn.creative.medialytics.com/ads/lexus/ct200h/bbc-ipad/june-2011/assets/video/CT-200h-30.m4v" class="videoPanel away-right"></div>
+				</div><!--/vgGallery-->
+			</div><!--/videoGalleryPanel-->
+			
+		
+	</div>
+	<!--/container-->
+
+
+<script type="text/javascript" charset="utf-8">
+
+//Variables
+var $d = document,
+
+	unbindVideoPanelSwipes = function(){
+		$m.unbind('vgGallery', $m.ui.touchstart, galleryOpener, false);
+		$m.unbind('vgGallery', $m.ui.touchmove, galleryHandler, false);
+		$m.unbind('vgGallery', $m.ui.touchend, galleryDecider, false);
+	},
+	
+	bindVideoPanelSwipes = function(){
+		$m.bind('vgGallery', $m.ui.touchstart, galleryOpener, false);
+		$m.bind('vgGallery', $m.ui.touchmove, galleryHandler, false);
+		$m.bind('vgGallery', $m.ui.touchend, galleryDecider, false);
+	},
+	
+
+	galleryTouch = function(){
+	
+		var gX, hX, dX, 
+		var oR = 'portrait'; //$m.find('body')[0].className; //orientation
+		var oP = (oR=='portrait' || oR=='portrait-180'); //
+		
+		galleryOpener = function(e){
+		
+		    var touches = (e.touches?e.touches:e);
+		    if(touches.length > 1) {
+		      return;
+		    }
+		    
+		    if(touches[0]){
+		   		gX = (oP?touches[0].pageX:touches[0].pageY);
+		    }else{
+		    	gX = (oP?e.pageX:e.pageY);
+		    }
+		    //console.log(gX);
+		    
+		},
+		
+		galleryHandler = function(e){
+		
+		    var touches = (e.touches?e.touches:e);
+		    if(touches.length > 1) {
+		      return;
+		    }
+		    
+		    if(touches[0]){
+		   		hX = (oP?touches[0].pageX:touches[0].pageY);
+		    }else{
+		    	hX = (oP?e.pageX:e.pageY);
+		    }
+
+		},
+		
+		galleryDecider = function(){
+		
+			dX = hX - gX;
+			dist = (dX > 0 ? dX : -1*dX);
+			threshold = (dist > 200);
+			
+			if((dX > 0)&& threshold){
+				if(oP){
+					moveVideoPanelsRight();
+				}else{
+					moveVideoPanelsLeft();
+				}
+			}else if(threshold){
+				if(oP){
+					moveVideoPanelsLeft();
+				}else{
+					moveVideoPanelsRight();
+				}
+			}
+			//console.log(hX+"--"+gX);
+		};
+		
+		bindVideoPanelSwipes();
+	};
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	galleryTouch();
+		
+	// prevent the viewport from moving on touch/drag
+	document.addEventListener('touchmove', function(e) { e.preventDefault(); });
+}, false);
+</script>
+  
+</body>
+</html>

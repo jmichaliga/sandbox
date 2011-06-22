@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>3D Transforms</title>
+<meta name="viewport" content="width=1024,height=768,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;}
+/* END Medialets Reset CSS */
+
+#container {
+	width: 800px;
+	position: relative;
+	margin: 0 auto;
+	-webkit-perspective: 1000;
+	font-family: 'Helvetica Neue', Helvetica, Arial;
+}
+	.holder {
+		-webkit-transform-style: preserve-3d;
+		-webkit-transform: translateZ( -800px );
+		height: 300px;
+	}
+		.slide {
+			-webkit-transition: all 800ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+			position: absolute;
+			text-align: center;
+			padding: 20px;
+			top: 20px;
+			left: 0px;
+			right: 0px;
+			background-color: rgba(0,0,0,0.1); /*#BADA55;*/
+		}
+			.past {
+				-webkit-transform: rotateY( -180deg ) translateZ( 800px );
+				opacity: 0;
+			}
+			.present {
+				-webkit-transform: rotateY(  0deg ) translateZ( 800px );
+				opacity: 1;
+			}
+			.future {
+				-webkit-transform: rotateY( 180deg ) translateZ( 800px );
+				opacity: 0;
+			}
+		
+		.slide h1 {
+			margin: 0 0 15px 0;
+			text-shadow: 1px 1px 1px #000;
+			color: #755;
+			font-size: 36px;
+		}
+
+		.slide p {
+			margin: 0;
+			color: #444;
+			font-size: 15px;
+		}
+ 
+ 
+</style> 
+
+</head>
+<body>
+
+
+    <div id="container">
+			<div class="holder"> 
+				<div class="slide future"> 
+					<h1>Welcome to the 3D slideshow Demo</h1> 
+					<p> 
+						Please use your arrow keys and keep your fingers away from the moving parts!
+					</p> 
+ 
+				</div> 
+				<div class="slide future"> 
+					<h1 class="thanks">Special Thanks:</h1> 
+					<p><a href="http://twitter.com/hakimel" target="_blank">@hakimel</a> for inspiring me</p> 
+				</div> 
+				<div class="slide future"> 
+					<h1>Can't wait until Firefox supports 3D transforms</h1> 
+					<p> 
+						Right now we just can just use the Webkit Twins.
+					</p> 
+				</div> 
+				<div class="slide future"> 
+					<h1>Filler (1 of 3)</h1> 
+				</div> 
+				<div class="slide future"> 
+					<h1>Filler (2 of 3)</h1> 
+				</div> 
+				<div class="slide future"> 
+					<h1>Filler (3 of 3)</h1> 
+				</div> 
+				<div class="slide future"> 
+					<h1>End</h1> 
+				</div> 
+			</div> 
+	</div><!--/container-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script> 
+
+<script type="text/javascript">
+	$(document).ready(function() {
+ 
+				var $slides = $('.slide');
+ 
+				$slides.first().removeClass('future').addClass('present');
+ 
+ 
+				$(document).keydown( function(event) {
+ 
+					//console.log( $('.slide').index('.present') )
+ 
+					if ( event.keyCode === 39 ) {
+						//right key, next slide
+  		
+						if ( $('.present').length ) {
+ 
+							$('.present').removeClass('present').addClass('past')
+								.next('.slide').removeClass('future').addClass('present');
+ 
+						} else if ( $('.future').length === $slides.length ) {
+							// at the very beginning, no slides showing
+ 
+							$slides.first().removeClass('future').addClass('present');
+ 
+						}
+ 
+ 
+					} else if ( event.keyCode === 37 ) {
+						// left key, prev slide
+ 
+						if ( $('.present').length ) {
+ 
+							$('.present').removeClass('present').addClass('future')
+								.prev('.slide').removeClass('past').addClass('present');
+ 
+						} else if ( $('.past').length === $slides.length ) {
+							// at the very end, no slides showing
+ 
+							$slides.last().removeClass('future').addClass('present');
+ 
+						}
+ 
+ 
+					}
+ 
+				});
+ 
+ 
+			});
+</script>
+</body>
+</html>

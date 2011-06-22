@@ -1,0 +1,55 @@
+<!DOCTYPE html>   
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="keywords" content="" />
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+	<style type="text/css">
+		#indy{position: absolute; width: 350px; height: 150px; border: 1px solid red;}
+		#candy{position: absolute; top: 200px; left: 200px; width: 350px; height: 150px; border: 1px solid green;}
+		#data{position: absolute; top: 400px; left: 400px; width: 350px; height: 150px; border: 1px solid blue;}
+	</style>
+</head>
+<body>
+	<div id="container">
+
+			<img id="indy" src="placeholder.gif"/>
+
+			<canvas id="candy" width="350" height="150">
+	
+			</canvas>
+			
+			<div id="data">
+			
+			</div>
+			
+			<p style="float: right">Red = ".gif", Green = "Canvas", Blue = "data:image/png; base64"</p>
+
+	</div><!--!/#container -->
+
+<script type="text/javascript" charset="utf-8">
+document.addEventListener('DOMContentLoaded', function() {
+
+	var candy = document.getElementById('candy');
+	context = candy.getContext('2d');
+	
+	var indy = document.getElementById('indy');
+	var data = document.getElementById('data');
+	
+  	indy.addEventListener('load', function () {
+		context.drawImage(indy, 0,0);
+		//imgData = context.getImageData(0,0, 350, 150);
+		dataImg = candy.toDataURL('image/png');
+		data.innerHTML = '<img src="'+dataImg+'"/>';
+	}, false);
+	
+}, false);
+</script>
+  
+</body>
+</html>
