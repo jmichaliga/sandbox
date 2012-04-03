@@ -1,0 +1,69 @@
+h2 {	
+margin-top: 0;
+}
+
+#viewport {
+-webkit-perspective: 2000; 
+-webkit-perspective-origin: 50% 50%;
+-webkit-transform: scale(1) translate3d(391px, 391px, 0);
+-webkit-transform-origin: center center;
+}
+
+#cube {
+position: relative;
+margin: 0 auto;
+height: 70px;
+width: 782px;
+-webkit-transition: -webkit-transform 50ms linear;
+-webkit-transform-style: preserve-3d;
+-webkit-transform: rotateX(0deg) rotateY(0deg);
+}
+
+#cube h2 {
+color: #fff;
+padding-top: 0;
+margin-top: 0;
+}
+
+#cube a {
+color: #fff;
+}
+
+#cube > div {
+position: absolute;
+height: 70px;
+width: 782px;
+padding: 0px;
+background-color: rgba(50, 50, 100, 0.75);
+border: 1px solid rgba(50, 50, 100, 0.95);
+font-size: 1em;
+line-height: 1em;
+color: #fff;
+-webkit-border-radius: 3px;
+}   
+
+#cube > div:first-child  {
+-webkit-transform: translateZ(0px);
+background-color: rgba(100, 50, 100, 0.75);
+border: 1px solid rgba(100, 50, 100, 0.95);
+}
+
+#cube > div:nth-child(2) {
+-webkit-transform: rotateY(90deg) translateX(391px) translateZ(391px);
+background-color: rgba(100, 50, 50, 0.75);
+border: 1px solid rgba(100, 50, 50, 0.95);
+}
+
+#cube > div:nth-child(3) {
+-webkit-transform: rotateY(180deg) translateZ(782px);
+background-color: rgba(50, 100, 100, 0.75);
+border: 1px solid rgba(50, 100, 100, 0.95);
+}
+
+section div {
+opacity: 0.5;
+}
+
+section div:hover {
+opacity: 1;
+}

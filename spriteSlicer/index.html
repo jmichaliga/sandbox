@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+/* END Medialets Reset CSS */
+
+body{background: #ABC url('bg-grid.jpg'); cursor: crosshair;}
+
+#container{position: absolute; width: 100%; height: 100%;}
+
+	#cuttingBoard{position: absolute; width: 100%; height: 100%; }
+		
+	#displayConsole{position: absolute; width: 85px; height: 30px;
+		color: #FFF; font-size: 11px; 
+		background-color: rgba(0,0,0,0.5);
+		-webkit-transition-duration: 500ms;
+	}
+		#startPos{font-size: 9px; position: absolute; left: 2px; top: 2px;}
+		#dimensions{position: absolute; left: 8px; top: 12px; width: 70px; 
+			text-align: center;	}
+
+	#displayConsole.hidden{opacity: 0;}
+	#displayConsole.active{opacity: 1;}	
+
+	#cursorConsole{position: absolute; width: 85px; height: 10px; font-size: 9px; color: #000;}	
+		#cursorConsole.hidden{opacity: 0;}
+		#cursorConsole.active{opacity: 1;}		
+	
+	#initConsole{position: absolute; font-size: 9px; -webkit-transition-duration: 500ms;}
+		#initConsole.hidden{opacity: 0;}
+		#initConsole.active{opacity: 1;}
+
+	#selectorBox{
+		position: absolute; 
+		border: 1px solid rgba(0,0,0,0.3); 
+		background-color: rgba(0,0,0,0.2); 
+	}
+	
+	#spriteAsset{position: absolute; left: 0px; top: 0px; width: 100%; height: 10000px;
+		background: transparent url('sprite.png') no-repeat;}
+	
+	#spriteItem{
+		position: absolute;
+		bottom:0px;
+		right: 0px;
+		width: 0px;
+		height: 0px;
+		-webkit-transition-duration: 500ms;
+		-webkit-transform-style: opacity;
+		background: rgba(255,255,255,0.3) url('sprite.png') no-repeat;
+	}
+
+</style>
+</head>
+
+<body>
+    <div id="container">
+
+		<div id="cuttingBoard">
+<!--
+
+  <input type="file" id="myfile" onChange="javascript:showSrc();" size="30">
+  <br>
+  <img id="myframe"/>
+  
+-->
+		</div>
+		
+		<div id="spriteAsset"></div>
+		
+		<div id="initConsole" class="hidden"></div>
+		
+		<div id="spriteItem" class="hidden"></div>
+
+		<div id="selectorBox"></div>
+		<div id="cursorConsole" class="active"></div>
+		<div id="displayConsole" class="hidden">
+			<div id="startPos"></div>
+			<div id="dimensions"></div>
+		</div>
+		
+		
+	</div><!--/container-->
+
+<script type="text/javascript" charset="utf-8">
+
+function replaceAll(txt, replace, with_this) {
+  return txt.replace(new RegExp(replace, 'g'),with_this);
+}
+function showSrc() {
+  //document.getElementById("myframe").src = document.getElementById("myfile").value; 
+  var theexa=document.getElementById("myframe").src.replace("file:///","");
+  var path=document.getElementById("myframe").src.replace("file:///","");
+  document.getElementById("myframe").src = document.getElementById("myfile").value; 
+  var correctPath=replaceAll(path,"%20"," ");
+  alert(correctPath);
+}
+
+window.addEventListener('load', function() {
+
+	$cB = document.getElementById('cuttingBoard'),
+	$dC = document.getElementById('displayConsole'),
+	$sP = document.getElementById('startPos'),
+	$dim = document.getElementById('dimensions'),
+	$sA = document.getElementById('spriteAsset'),
+	$sI = document.getElementById('spriteItem'),
+	$sB = document.getElementById('selectorBox'),
+	$iC = document.getElementById('initConsole'),
+	$cC = document.getElementById('cursorConsole'),
+	
+	var boxes = new Array();
+	var t, l, w, h;
+	var mD = false;
+	var sprite = "background: rgba(255,255,255,0.3) url('img/textAssets.png') no-repeat";
+	
+	setTimeout(function(){$sA.style.background = sprite;}, 500);
+
+	generatePreview = function(l, t, w, h){
+		$sI.style.width = w+'px';
+		$sI.style.height = h+'px';
+		$sI.style.backgroundPosition = '-'+l+'px -'+t+'px';
+		$sI.style.top = window.pageYOffset+'px';
+		console.log("background: transparent url('img/textAssets.png') no-repeat -"+l+"px -"+t+"px; width: "+w+"px; height: "+h+"px;");
+	},
+	
+	handleDown = function(e){
+        
+         l = e.pageX;
+         t = e.pageY;
+         
+         w = 0;
+         h = 0;
+         
+         $sB.style.width = w+"px";
+		 $sB.style.height = h+"px";
+         
+         $sB.style.left = l+"px";
+         $sB.style.top = t+"px";		
+         $sP.innerHTML = l+'\', '+t;
+		 $dC.style.left = (l+10)+"px";
+		 $dC.style.top = (t-40)+"px";
+		 $dC.className="active";
+		 $dim.innerHTML = '';
+		 $cC.className = 'hidden';
+		 mD = true;
+		 
+		 document.addEventListener('mousemove', handleMove);	
+	},
+	
+	handleMove = function(e){
+		if(mD && e.pageX > l && e.pageY > t){
+			w = e.pageX - l;
+			h = e.pageY - t;
+			$sB.style.width = w+"px";
+			$sB.style.height = h+"px";
+			$dim.innerHTML = w+"x"+h;
+			$dC.style.left = (e.pageX+10)+"px";
+			$dC.style.top = (e.pageY-35)+"px";
+
+			document.addEventListener('mouseup', handleUp);
+		}else{
+			$iC.className = 'active';
+			initMove();
+		}
+	},
+	
+	handleUp = function(e){
+		document.removeEventListener('mousemove', handleMove);
+		document.addEventListener('mouseup', handleUp);
+		mD = false;
+		generatePreview(l,t,w,h);
+	},
+	
+	initMove = function(e){
+		$iC.innerHTML = e.pageX+"x"+e.pageY;
+		$iC.style.left = (e.pageX+10)+"px";
+		$iC.style.top = (e.pageY+10)+"px";
+	};
+	
+	document.addEventListener('scroll', function(e){
+		//console.log(e);
+		$sI.style.top = window.pageYOffset+'px';
+	});
+	
+	document.addEventListener('mousedown', handleDown);
+
+	
+	document.addEventListener('mousemove', function(e){
+		   if(!mD){
+	    	$cC.innerHTML = e.pageX+"x"+e.pageY;
+			$cC.style.left = (e.pageX+5)+"px";
+			$cC.style.top = (e.pageY+5)+"px";
+	    }
+	}, false);
+  	//$cB.addEventListener('drop', handleFileSelect, false);
+	
+}, false);
+</script>
+  
+</body>
+</html>

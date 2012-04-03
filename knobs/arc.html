@@ -1,0 +1,40 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+      var ns = "http://www.w3.org/2000/svg";
+      var svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('width', 640);
+      svg.setAttribute('height', 640);
+
+      var path = document.createElementNS(ns, 'path');
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'red');
+      path.setAttribute('stroke-width', '5');
+      update = function (angle) {
+        angle = angle % (Math.PI * 2);
+        x = 300 - 300 * Math.cos(angle) ;
+        y = - 300 * Math.sin(angle);
+        var big = 0;
+        if (angle > Math.PI) {
+          big = 1;
+        }
+        else {
+          big = 0;
+        }
+        var d = 'M320,320 h-300 a300,300 0 ' + big + ',1 ' + x + ',' + y + ' z';
+        path.setAttribute('d', d);
+      }
+
+      var angle = 0;
+      setInterval(function() {
+        angle += Math.PI/1000;
+        update(angle);
+      }, 1);
+
+      svg.appendChild(path);
+      document.body.appendChild(svg);
+    </script>
+  </body>
+</html>

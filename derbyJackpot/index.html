@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DerbyJackpot</title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+<style type="text/css">
+
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent;}
+body{background: #106b4d;}
+#container{position: absolute; width: 100%; height: 100%; background: #106b4d url('images/background.jpg') no-repeat;
+	-webkit-transform: translate3d(0,0,0);}
+#wrapper{width: 1376px; height: 750px; margin: 0px auto;}
+
+
+#header{width: 800px; height: 110px; margin: 0px auto;}
+#logo{float: left; width: 172px; height: 34px; background: url('images/logo.png') no-repeat; margin-top: 20px;}
+#clock{float: right; width: 547px; height: 111px; background: url('images/clock-bg.png') no-repeat 50% 50%;}
+
+#betCard{margin: 5px auto; width: 965px; height: 552px;}
+
+	#top-menu{position: relative; width: 670px; height: 69px; top: 72px; left: 30px; background: url('images/top-menu.png') no-repeat;}
+		#top-menu.show{-webkit-transition-duration: 500ms; -webkit-transform: translate3d(0,-37px,0);}
+		
+	#card{position: absolute; width: 965px; height: 552px; background: url('images/box-background.png') no-repeat;}
+	
+
+	#intro{position: absolute; width: 928px; height: 494px; left: 25px; top: 82px; overflow: hidden;}
+		#intro-top{position: absolute; width: 928px; height: 247px; background: url('images/intro.jpg') no-repeat;}
+		#intro-bot{position: absolute; width: 928px; top: 247px; height: 247px; background: url('images/intro.jpg') no-repeat 0px -247px;}
+			#intro-top.move{-webkit-transform: translate3d(0,-250px,0); -webkit-transition-duration: 1500ms;}
+			#intro-bot.move{-webkit-transform: translate3d(0,250px,0); -webkit-transition-duration: 1500ms;}
+		
+	#step-one{position: absolute; width: 687px; height: 327px; left: 36px; top: 22px;}
+	
+		#viewport{height: 289px; left: 27px; position: absolute; top: 25px; width: 635px; overflow: hidden;}
+		
+		#row-top{position: absolute; width: 600px; height: 300px; left: -25px; top: 25px; -webkit-transition-duration: 500ms;}
+		
+		#row-bottom{position: absolute; width: 63600px; height: 120px; left: -25px; top: 160px; -webkit-transition-duration: 500ms;}
+			.horse{float: left; width: 165px; height: 111px; background: url('images/horse.png') no-repeat; margin: 5px;}
+
+			#horse-1{background-position: -0px 0px;}
+			#horse-2{background-position: -200px 0px;}
+			#horse-3{background-position: -400px 0px;}
+			#horse-4{background-position: -600px 0px;}
+			#horse-5{background-position: -800px 0px;}
+			#horse-6{background-position: -1000px 0px;}
+			#horse-7{background-position: -1200px 0px;}
+			#horse-8{background-position: -1400px 0px;}
+			#horse-9{background-position: -1600px 0px;}
+			#horse-10{background-position: -1800px 0px;}
+			
+			#horse-11{background-position: -0px -150px;}
+			#horse-12{background-position: -200px -150px;}
+			#horse-13{background-position: -400px -150px;}
+			#horse-14{background-position: -600px -150px;}
+			#horse-15{background-position: -800px -150px;}
+			#horse-16{background-position: -1000px -150px;}
+			#horse-17{background-position: -1200px -150px;}
+			#horse-18{background-position: -1400px -150px;}
+			#horse-19{background-position: -1600px -150px;}
+			#horse-20{background-position: -1800px -150px;}
+
+	#arrows{background: url('images/arrows.png') repeat-y; height: 294px; left: 17px; position: absolute; margin-top: 20px; width: 660px;}
+	
+	#step-two{height: 117px; left: 25px; position: relative; top: 375px; width: 277px;}
+	
+	.bet{position: absolute; width: 52px; height: 52px; opacity: 0.5;}
+		#dollar-2{left: 17px; top: 35px;}
+		#dollar-3{left: 69px; top: 46px;}
+		#dollar-5{left: 118px; top: 56px;}
+		#dollar-10{left: 169px; top: 46px;}
+		#dollar-20{left: 220px; top: 35px;}
+
+		#dollar-2:hover{background: url('images/selected-dollars.jpg') no-repeat -2px -4px;}
+		#dollar-3:hover{background: url('images/selected-dollars.jpg') no-repeat -54px -15px;}
+		#dollar-5:hover{background: url('images/selected-dollars.jpg') no-repeat -103px -25px;}
+		#dollar-10:hover{background: url('images/selected-dollars.jpg') no-repeat -154px -15px;}
+		#dollar-20:hover{background: url('images/selected-dollars.jpg') no-repeat -205px -4px;}
+		
+	#place-bet{position: absolute; width: 100px; height: 96px; top: 386px; left: 590px; background: url('images/place-bet.png') no-repeat;}
+		#place-bet:hover{background-position: -100px 0px;}
+		
+	#leftArrow{float: left; width: 50%; height: 100%;}
+	#rightArrow{float: right; width: 50%; height: 100%;}
+	
+	#sidebar{position: absolute; left: 729px; width: 210px; height: 480px; border-radius: 3px; margin-top: 17px; margin-right: 26px;}
+	
+		#accordion2{position: absolute; width: 221px; height: 480px;}
+			.accordion-group{border: none; margin-bottom:0px; padding-left: 3px; border-radius: 1px;
+				background: url('images/accordion-group-bg.jpg') repeat-y;}
+			.accordion-heading{background: url('images/accordion-heading-bg.jpg') no-repeat; height: 26px;}
+				.accordion-toggle:hover{text-decoration: none; color: #FFF;}
+				
+			.accordion-heading .accordion-toggle{
+				color: #FFF; padding: 5px 10px; 
+				text-shadow: -1px -1px 2px #000, 1px 1px 2px #FFF; 
+				font-size: 0.9em; font-weight: 700;}
+			.accordion-inner{background: #fff0d0; color: #7f531a; font-size: 0.8em;}
+			
+			#chat .accordion-heading {background: url('images/accordion-heading-chat-bg.jpg') no-repeat; }
+			#chat .accordion-inner{background: #fff; color: #000;}
+	
+</style>
+</head>
+
+<body class="landscape-left">
+    <div id="container">
+    
+    	<div id="header">
+        	<div id="logo"></div>
+    		<div id="clock"></div>	
+    	</div>
+    	
+		<div id="betCard">
+		
+		<div style="position: absolute;">	
+
+	    	<div id="top-menu">
+	    		<div id="tab-monkey"></div>
+	    		<div id="tab-dime"></div>
+	    		<div id="tab-fiddy"></div>
+	    		<div id="tab-gonzo"></div>
+	    	</div>
+	    	
+	    	<div id="card">
+	    		<div id="step-one">
+	    		
+	    			<div id="viewport">
+
+		    			<div id="row-top">
+							<div id="horse-1" class="horse"></div>
+							<div id="horse-2" class="horse"></div>
+							<div id="horse-3" class="horse"></div>
+							<div id="horse-4" class="horse"></div>
+							<div id="horse-5" class="horse"></div>
+							<div id="horse-6" class="horse"></div>
+							<div id="horse-7" class="horse"></div>
+							<div id="horse-8" class="horse"></div>
+							<div id="horse-9" class="horse"></div>
+							<div id="horse-10" class="horse"></div>
+							<div id="horse-11" class="horse"></div>
+							<div id="horse-12" class="horse"></div>
+							<div id="horse-13" class="horse"></div>
+							<div id="horse-14" class="horse"></div>
+							<div id="horse-15" class="horse"></div>
+							<div id="horse-16" class="horse"></div>
+							<div id="horse-17" class="horse"></div>
+							<div id="horse-18" class="horse"></div>
+							<div id="horse-19" class="horse"></div>
+							<div id="horse-20" class="horse"></div>  			
+		    			</div>
+	    			
+	    			</div><!--/viewport-->
+	    			
+	    			<div id="arrows">
+	    				<div id="leftArrow"></div>
+	    				<div id="rightArrow"></div>
+	    			</div>
+	    			
+	    		</div><!--step-one-->
+	    		
+	    		<div id="step-two">
+	    			<div id="dollar-2" class="bet"></div>
+	    			<div id="dollar-3" class="bet"></div>
+	    			<div id="dollar-5" class="bet"></div>
+	    			<div id="dollar-10" class="bet"></div>
+	    			<div id="dollar-20" class="bet"></div>
+	    		</div><!--step-two-->
+	    	
+	    		<div id="place-bet">
+	    		
+	    		</div>
+	    	</div><!--/card-->
+	    	
+	    	
+	    	<div id="sidebar">
+	    		<div id="side-account"></div>
+	    		<div id="side-results"></div>
+	    		<div id="side-bets"></div>
+	    		<div id="side-chat"></div>
+	    		
+	    		
+ 			<div class="accordion" id="accordion2">
+ 			
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                  My Account
+                </a>
+              </div>
+              <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                  Results
+                </a>
+              </div>
+              <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                  My Bets
+                </a>
+              </div>
+              <div id="collapseThree" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. 
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-group" id="chat">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="" data-parent="#accordion2" href="#collapseFour">
+                  Chat
+                </a>
+              </div>
+              <div id="collapseFour" class="accordion-body">
+                <div class="accordion-inner">
+                  Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <!--/exampleAccordion-->
+          
+          
+	    	</div><!--/sidebar-->
+	    	
+	    	
+	    	<div id="intro">
+	    		<div id="intro-top"></div>
+	    		<div id="intro-bot"></div>
+	    	</div>
+		
+		</div>
+	    	
+		</div><!--/betCard-->
+		
+	</div>
+	<!--/container-->
+
+<!-- <script src="js/src/zepto.js"></script> -->
+<script src="js/jquery.1.7.2.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+window.addEventListener('load', function() {
+
+	var $d = document,
+	$topMenu = $('#top-menu')[0],
+	$introTop = $('#intro-top')[0],
+	$introBot = $('#intro-bot')[0],
+	$arrows = $('#arrows')[0],
+	$lArrow = $('#leftArrow')[0],
+	$rArrow = $('#rightArrow')[0],
+	$rowTop = $('#row-top')[0],
+	$rowBot = $('#row-bottom')[0],
+	legal = true,
+	horseWidth = 175,
+	slotNumTop = 0,
+	slotNumBot = 0;
+	
+	var hasTouch = 'ontouchstart' in window,
+		sEV = hasTouch ? 'touchstart' : 'mousedown';
+		mEV = hasTouch ? 'touchmove' : 'mousemove';
+		eEV = hasTouch ? 'touchend' : 'mouseup';
+	
+			rowElements = $rowTop.childElementCount;	
+			extraColumn = (rowElements % 2 ? horseWidth : 0);
+			rowWidth = rowElements * horseWidth / 2 + (extraColumn);
+			
+			$rowTop.style.width = rowWidth+"px";
+		
+	moveHorses = function(row, direction){
+	
+		legal = (slotNumTop >= 0 && slotNumTop * horseWidth <= rowWidth);
+		
+		if(row=='top'){
+			
+			slotNumTop = (direction == 1 ? slotNumTop - 1 : slotNumTop + 1);	
+			$rowTop.style.webkitTransform = 'translate3d('+(horseWidth * slotNumTop)+'px,0,0)';	
+		}else{
+			slotNumBot = (direction == 1 ? slotNumBot - 1 : slotNumBot + 1);		
+			$rowBot.style.webkitTransform = 'translate3d('+(horseWidth * slotNumBot)+'px,0,0)';			
+		}
+	}
+	
+	//Drags
+	$arrows.addEventListener(sEV, sF = function(e){
+		$arrows.addEventListener(mEV, mF = function(ev){
+			console.log(ev.layerX);
+			finX = (ev.touches ? ev.touches[0].layerX : ev.layerX);
+			finY = (ev.touches ? ev.touches[0].layerY : ev.layerY);
+		});
+		$arrows.addEventListener(eEV, eF = function(){
+			$arrows.removeEventListener(mEV, mF);
+			$arrows.removeEventListener(eEV, eF);
+			if(finX >= 630){
+				moveHorses('top',-1);
+				///moveHorses('bot',-1);
+				console.log('left');
+			}else{
+				moveHorses('top',1);
+				//moveHorses('bot',1);
+				console.log('right');
+			}
+		});
+	});
+	
+	//Clicks
+	$lArrow.addEventListener('click',function(){moveHorses('top',1); moveHorses('bot',1);});
+	$rArrow.addEventListener('click',function(){moveHorses('top',-1); moveHorses('bot',-1);});
+	
+	
+	//TB-Accordion
+	$(".accordion").collapse();
+	
+	//Intro Animation	
+	setTimeout(function(){
+		$introTop.className = 'move';
+		$introBot.className = 'move';
+		$introBot.addEventListener('webkitTransitionEnd', function(){
+			$topMenu.className = 'show';
+			$('#intro')[0].style.display = 'none';
+		});
+	},1000);
+	
+	// prevent the viewport from moving on touch/drag
+	document.addEventListener('touchmove', function(e) { e.preventDefault(); });
+}, false);
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html land="en">
+<head>
+<title>DerbyJackpot</title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+<style type="text/css">
+
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent; font-family: "Helvetica Neue", Helvetica, sans-serif;}
+
+body{background: #106b4d;}
+#container{position: absolute; width: 100%; height: 100%; background: #106b4d url('images/background.jpg') no-repeat;
+	-webkit-transform: translate3d(0,0,0);}
+#wrapper{width: 1376px; height: 750px; margin: 0px auto;}
+
+
+#heading{width: 800px; height: 110px; margin: 0px auto;}
+#logo{float: left; width: 172px; height: 34px; background: url('images/logo.png') no-repeat; margin-top: 20px;}
+
+#topmenu{float: right; width: 500px; height: 34px; }
+
+
+.pageview{background: #FFF; border-radius: 5px;}
+	.main{border-radius: 5px 0px 0px 5px; background-color: #FFF; padding: 20px;}
+	.sidebar{border-radius: 0px 5px 5px 0px; background: #CCC url('images/form-sidebar-bg.jpg'); padding: 20px;}
+	
+	legend{background-color: #dbe6e1; color: #26694f; padding-left: 10px;}
+	.help-block{font-style: oblique;}
+	.help-block span{color: red;}
+	
+	.controls .help-block{opacity: 0;}
+	
+	.sidebar-panel{float: left; width: 100%; height: 100%;}
+	.sidebar-heading{width: 273px; position: relative; background: url('images/sidebar-heading-bg.jpg') repeat-y;
+		left: -30px; border-bottom: 1px solid #1b4735; border-top: 1px solid #88bea8; color: #FFF;}
+		.sidebar-heading h4{padding: 10px;}
+		.sidebar-heading-shadow{float: left; bottom: -12px; left: 0px; position: absolute; }
+		
+	.sidebar-content{margin: 20px 0px; float: left; color: #777; font-size: 0.9em; text-shadow: 0px 1px 1px #FFF;}
+	.sidebar-content li{list-style-image: url('images/form-sidebar-bullet.png');}
+		#contact-info{background: url('images/form-contact-info.png') no-repeat;
+			float: left; height: 101px; margin-left: -20px; width: 259px;}
+</style>
+</head>
+
+<body class="landscape-left">
+    <div id="container">
+    
+
+    	<div id="heading">
+        	<div id="logo"></div>
+        	<div id="topmenu"></div>
+    	</div>
+    	
+    	<div class="pageview container" id="sign-up">
+    		<div class="row-fluid">
+    		
+	  			<div class="main span8">
+	  				<div class="page-heading">
+	  					<h2>Create an Account</h2>
+	  					<h4>When you create your account we'll deposit your $10.00 winnings immediately.
+You can withdrawal funds, or play more races for big bucks.</h4>
+						<p class="help-block"><span class="error">*</span> Indicates required information</p>
+	  				</div>
+	  				
+	  				
+<form class="form-horizontal">
+  <fieldset>
+    <legend>1. The Basics</legend>
+    <div class="control-group">
+    
+      <label class="control-label" for="input01">First Name</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="input01">
+        <p class="help-block"><span>*</span> Field is required</p>
+      </div>
+
+      <label class="control-label" for="input02">Last Name</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="input02">
+        <p class="help-block"><span>*</span> Field is required</p>
+      </div>
+      
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>2. Contact Info</legend>
+    <div class="control-group">
+    
+      <label class="control-label" for="input01">State</label>
+      <div class="controls">
+			<select class="span1">
+                <option>NJ</option>
+                <option>NY</option>
+                <option>MD</option>
+                <option>NC</option>
+                <option>WA</option>
+              </select>
+        <p class="help-block"><span>*</span> Field is required</p>
+      </div>
+
+      <label class="control-label" for="input02">Social Security Number</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="input02">
+        <span class="help-inline"><a href="#">Why do we need this?</a>
+        <p class="help-block"><span>*</span> Field is required</p>
+      </div>
+      
+    </div>
+  </fieldset>
+
+
+  <fieldset>
+    <legend>3. Time to Play</legend>
+    <div class="control-group">
+    
+    	<p>By clicking Create my account you agree to the Terms of Service, Privacy, and Refund policies.</p>
+ 		<input class="btn-large btn-success" type="submit" value="Create My Account">
+      
+    </div>
+  </fieldset>  
+ 
+  
+</form>
+	  				
+	  			</div><!--/main-->
+	  			
+	  			<div class="sidebar span3">
+	  				
+	  				<div class="sidebar-panel">
+	  					<div class="sidebar-heading">
+	  						<h4>Just Ask: 24hours a day, 7 days a week</h4>
+	  						<img src="images/sidebar-heading-shadow.gif" width="12" height="12" class="sidebar-heading-shadow"/>
+	  					</div>
+	  					<div class="sidebar-content">
+	  						<div id="contact-info"></div>
+	  					</div>
+	  				</div>
+	
+	  				<div class="sidebar-panel">
+	  					<div class="sidebar-heading">
+	  						<h4>Derby Jackpot is safe, legal, and secure</h4>
+	  						<img src="images/sidebar-heading-shadow.gif" width="12" height="12" class="sidebar-heading-shadow"/>
+	  					</div>
+	  					<div class="sidebar-content">
+	  						<ul>
+	  							<li>USA Based Company</li>
+	  							<li>Secured by Verisign</li>
+	  							<li>Never shared personal information</li>
+	  						</ul>
+	  					</div>
+	  				</div>
+	
+	  				<div class="sidebar-panel">
+	  					<div class="sidebar-heading">
+	  						<h4>America's First Social Gambling Game!</h4>
+	  						<img src="images/sidebar-heading-shadow.gif" width="12" height="12" class="sidebar-heading-shadow"/>
+	  					</div>
+	  					<div class="sidebar-content">
+	  						<ul>
+	  							<li>Over 150 horse tracks in America</li>
+	  							<li>Live Video Feeds</li>
+	  							<li>Bet on over 50 races per day</li>
+	  						</ul>
+	  					</div>
+	  				</div>
+	
+	  				
+	  			</div><!--/sidebar-->
+	  		
+    	</div><!--/sign-up-->
+    	
+		
+	</div>
+	<!--/container-->
+
+<!-- <script src="js/src/zepto.js"></script> -->
+<script src="js/jquery.1.7.2.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+window.addEventListener('load', function() {
+
+	var $d = document;
+	
+	var hasTouch = 'ontouchstart' in window,
+		sEV = hasTouch ? 'touchstart' : 'mousedown';
+		mEV = hasTouch ? 'touchmove' : 'mousemove';
+		eEV = hasTouch ? 'touchend' : 'mouseup';
+		
+	
+	//TB-Accordion
+	$(".accordion").collapse();
+	
+	
+	// prevent the viewport from moving on touch/drag
+	//document.addEventListener('touchmove', function(e) { e.preventDefault(); });
+}, false);
+</script>
+  
+</body>
+</html>

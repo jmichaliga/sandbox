@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>BoltJS Documentation - {{ page.title }}</title>
+    <link href="http://github.com/stylesheets/bundle_common.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="http://github.com/stylesheets/bundle_github.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="nav">
+      <ul id="pagenav">
+        <li><a href="intro.html">Introduction</a></li>
+        <li><a href="gettingstarted.html">Getting Started</a></li>
+        {% if page.section == 'gettingstarted' %}
+        <li>
+          <ul>
+            <li><a href="helloworld.html">Hello World Tutorial</a></li>
+            <li><a href="bolt_basics.html">Bolt Basics</a></li>
+          </ul>
+        </li>
+        {% endif %}
+        <li><a href="view.html">Views</a></li>
+        {% if page.section == 'view' %}
+        <li>
+          <ul>
+            <li><a href="view_building.html">Building Views</a></li>
+            <li><a href="view_event.html">Events</a></li>
+            <li><a href="view_delegateproperties.html">Delegate Properties</a></li>
+            <li><a href="view_layouts.html">Layout Views</a></li>
+            <li><a href="table_view.html">Table</a></li>
+          </ul>
+        </li>
+        {% endif %}
+        <li><a href="model.html">Models</a></li>
+        
+        {% if page.section == 'model' %}
+        <li>
+          <ul>
+            <li><a href="model_binding.html">Binding</a></li>
+          </ul>
+        </li>
+        {% endif %}
+
+        <li><a href="collection.html">Collections</a></li>
+        <li><a href="building.html">Building Bolt</a></li>
+        <li><a href="demos.html">Demos</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+
+    </div>
+    <div id="main">
+      <a href="/boltjs" class="headerlogo"><img width="100" height="100" src="http://boltjs.org/images/BoltJS.png" alt="github pages" /></a>
+      <div id="header" class="basic" style="margin-bottom:20px">
+
+        <div class="site">
+          <h1>
+            BoltJS Documentation
+          </h1>
+        </div>
+      </div>
+
+      <div id="content" class="site">
+
+        {{ content }}
+
+      </div>
+
+      <div class="push"></div>
+    </div>
+
+    <div id="footer">
+      <div class="site">
+
+        <div class="info">
+          <div class="links">
+            <a href="http://github.com/blog"><b>Blog</b></a> |
+            <a href="http://support.github.com/">Support</a> |
+            <a href="http://github.com/training">Training</a> |
+            <a href="http://github.com/contact">Contact</a> |
+            <a href="http://develop.github.com">API</a> |
+            <a href="http://status.github.com">Status</a> |
+            <a href="http://twitter.com/github">Twitter</a> |
+            <a href="http://github.com/security">Security</a>
+          </div>
+          <div class="company">
+           &copy;
+            {{ site.time | date: "%Y" }}
+            GitHub Inc.
+            All rights reserved.
+           | <a href="http://github.com/site/terms">Terms of Service</a> | <a href="http://github.com/site/privacy">Privacy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

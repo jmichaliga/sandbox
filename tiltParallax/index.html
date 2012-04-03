@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent;}
+/* END Medialets Reset CSS */
+
+
+#container{position: absolute; width: 1920px; height: 1200px; background: #111 url('darkWood.jpg') no-repeat;
+	-webkit-transform-duration: 500ms;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+#ball{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	-webkit-radius: 25px;
+	background-color: rgba(255,255,255,0.5);
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	-webkit-transition-duration: 10ms;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+</style>
+</head>
+
+<body>
+    <div id="container">
+		<div id="ball"></div>
+	</div>
+	<!--/container-->
+
+<script src="mmbridge.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://creative.medialytics.com/javascript/medialets.core.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" charset="utf-8">
+document.addEventListener('DOMContentLoaded', function() {
+
+
+	$c = $m('container');
+	bgy = 0;
+	bgx = 0;
+/*
+	
+	for(i=0; i<200; i++){
+		setTimeout(function(){
+			bgx--;
+			$c.style.backgroundPosition = bgx+'px '+bgy+'px';
+		},i*10);
+	}
+	
+*/
+
+// Position Variables
+var x = 350;
+var y = 500;
+ 
+// Speed - Velocity
+var vx = 0;
+var vy = 0;
+ 
+// Acceleration
+var ax = 0.1;
+var ay = 0.1;
+ 
+var delay = 20;
+var vMultiplier = 0.01;
+ 
+if (window.DeviceMotionEvent!=undefined) {
+
+	window.ondevicemotion = function(event) {
+		ax = event.accelerationIncludingGravity.x;
+		ay = event.accelerationIncludingGravity.y;
+		
+	}
+ 
+	setInterval(function() {
+		vy = vy + -(ay);
+		vx = vx + ax;
+ 
+		var ball = document.getElementById("ball");
+		y = parseInt(y + vy * vMultiplier);
+		x = parseInt(x + vx * vMultiplier);
+		
+		if (x<0) { x = 0; vx = 0; }
+		if (y<0) { y = 0; vy = 0; }
+		if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = 0; }
+		if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = 0; }
+		
+		//ball.style.top = y + "px";
+		//ball.style.left = x + "px";
+		
+		bgy = 0;
+		bgx = parseInt(-1*(y)*(0.5)+300);
+		
+		$c.style.webkitTransform = 'translate3d('+bgx+'px,'+bgy+'px,0)';
+		//$c.style.left = bgx+"px";
+		//$c.style.top = bgy+"px";
+		
+		ball.style.webkitTransform = "translate3d("+x+"px,"+y+"px,0)";
+		console.log(bgx);
+		
+	}, delay);
+} 
+	
+	
+	// prevent the viewport from moving on touch/drag
+	$m.bind(document, 'touchmove', function(e) { e.preventDefault(); });
+}, false);
+</script>
+  
+</body>
+</html>

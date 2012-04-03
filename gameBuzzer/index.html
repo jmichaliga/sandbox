@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent;}
+/* END Medialets Reset CSS */
+
+#container{position: absolute; height: 480px; width: 320px; 
+	background: #111 url('black-Linen.png'); 
+	font-family: "Helvetica Neue"; font-size: 1.5em;text-transform: uppercase;
+	font-weight: bolder; color: #000;overflow: hidden;}
+
+	#logo{position: absolute; width: 79px;height: 144px; background: url('logo.png') no-repeat; opacity: 0; left: 20px; top: 20px;}
+		#logo.in{-webkit-transition-duration: 1s; opacity: 1;}
+
+	#userHead{position: absolute; -webkit-transition-duration: 700ms;}
+		#userHead.settled{-webkit-transform: translate3d(0,50px,0);}
+		
+		#colorSelector{-webkit-transition-duration: 700ms;}
+			
+	#userConsole{float: left; margin: 6px 0px 0px 6px; width: 266px; height: 32px; 
+		-webkit-transition-duration: 500ms; border-radius: 3px; 
+		background-color: #FFF; padding: 20px; text-align: center;}
+		#userConsole.inactive{opacity: 0.5;}
+		.red #userConsole{background-color: transparent; color: red;}
+		.blue #userConsole{background-color: transparent; color: blue;}
+		.limegreen #userConsole{background-color: transparent; color: limegreen;}
+		.yellow #userConsole{background-color: transparent; color: yellow;}
+		.violet #userConsole{background-color: transparent; color: violet;}
+		.orange #userConsole{background-color: transparent; color: orange;}
+		
+		#userConsole.red{background-color: red;}
+		#userConsole.blue{background-color: blue;}
+		#userConsole.limegreen{background-color: limegreen;}
+		#userConsole.yellow{background-color: yellow;}
+		#userConsole.violet{background-color: violet;}
+		#userConsole.orange{background-color: orange;}
+		
+		#userConsole.settled{-webkit-transform: scale(0.8) translate3d(80px,50px,0);	}
+
+	#submitUser{float: left; margin: 6px 0px 0px 6px; width: 266px; height: 32px; 
+		opacity: 0;	font-size: 2em; line-height: 20px; border-radius: 3px; 
+		-webkit-transition-duration: 700ms;
+		-webkit-box-shadow: 1px 1px 3px #000;
+		background-color: #CCC; padding: 20px; text-align: center;}
+			
+			.settled #submitUser{opacity: 1;}
+			.settled #submitUser.inactive{opacity: 0.5;}
+
+	.char{float: left; margin: 6px 0px 0px 6px; width: 28px; height: 28px;
+		border-radius: 3px; 
+		-webkit-box-shadow: 1px 1px 3px #000;
+		background-color: #00c445; color: #000;
+		-webkit-transition-duration: 250ms; -webkit-transform: scale(1);
+		padding: 5px; text-align: center;}
+		.char.out{-webkit-transform: scale(0.01);}
+		.char.pressed{-webkit-transform: scale(1.2);}
+		
+	.color{float: left; margin: 6px 0px 0px 6px;  width: 46px; height: 46px; opacity: 1;
+		-webkit-box-shadow: 1px 1px 3px #000; 
+		border-radius: 3px; -webkit-transition-duration: 700ms;}
+	.out .color{opacity: 0;}
+
+	#color-red{background-color: red;}
+	#color-blue{background-color: blue;}
+	#color-limegreen{background-color: limegreen;}
+	#color-yellow{background-color: yellow;}
+	#color-violet{background-color: violet;}
+	#color-orange{background-color: orange;}
+	
+	#keyboard{position: absolute; bottom: 6px; -webkit-transition-duration: 700ms;
+		height: 182px; width: 318px; left: 2px;
+		-webkit-transform: translate3d(0,188px,0);}
+		#keyboard.in{-webkit-transform: translate3d(0,0,0);}
+		
+	#buzzButton{position: absolute; left: 60px; bottom: 100px;
+		width: 187px; height: 190px; background: url('inactiveButton.png') no-repeat;
+		-webkit-transition-duration: 1s;
+		}
+		
+		#buzzButton.out{-webkit-transform: translate3d(0,300px,0);}
+	#activeButton{position: absolute; width: 187px; height: 190px; background: url('activeButton.png') no-repeat;
+		-webkit-transition-duration: 500ms;}
+		#activeButton.disabled{display:none;}
+		#activeButton.enabled{display: block; opacity: 0;}
+		#activeButton.enabled.show{display:block; opacity:1;}
+	
+</style>
+</head>
+
+<body>
+    <div id="container">
+
+	<div id="logo"></div>
+	<div id="userHead" class="settled">
+
+		<div id="userConsole" class="inactive"></div>
+		<div id="colorSelector" class="in">
+			<div id="color-red" class="color"></div>
+			<div id="color-yellow" class="color"></div>
+			<div id="color-blue" class="color"></div>
+			<div id="color-limegreen" class="color"></div>
+			<div id="color-violet" class="color"></div>
+			<div id="color-orange" class="color"></div>		
+		</div>
+		
+		<div id="submitUser" class="inactive">+</div>
+	
+	</div><!--/userHead-->
+
+
+	<div id="keyboard" class="in">
+
+		<div id="char-a" class="char out">a</div>
+		<div id="char-b" class="char out">b</div>
+		<div id="char-c" class="char out">c</div>
+		<div id="char-d" class="char out">d</div>
+		<div id="char-e" class="char out">e</div>
+		<div id="char-f" class="char out">f</div>
+		<div id="char-g" class="char out">g</div>
+		<div id="char-h" class="char out">h</div>
+		<div id="char-i" class="char out">i</div>
+		<div id="char-j" class="char out">j</div>
+		<div id="char-k" class="char out">k</div>
+		<div id="char-l" class="char out">l</div>
+		<div id="char-m" class="char out">m</div>
+		<div id="char-n" class="char out">n</div>
+		<div id="char-o" class="char out">o</div>
+		<div id="char-p" class="char out">p</div>
+		<div id="char-q" class="char out">q</div>
+		<div id="char-r" class="char out">r</div>
+		<div id="char-s" class="char out">s</div>
+		<div id="char-t" class="char out">t</div>
+		<div id="char-u" class="char out">u</div>
+		<div id="char-v" class="char out">v</div>
+		<div id="char-w" class="char out">w</div>
+		<div id="char-x" class="char out">x</div>
+		<div id="char-y" class="char out">y</div>
+		<div id="char-z" class="char out">z</div>
+		<div id="char- " class="char out">_</div>
+		<div id="del" class="char out">&larr;</div>
+	
+	</div><!--/keyboard-->
+
+	<div id="buzzButton" class="out">
+		<div id="activeButton" class="disabled"></div>
+	</div>	
+
+	</div>
+	<!--/container-->
+<script src="zepto.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+window.addEventListener('load', function() {
+
+	$keys = $('.char'),
+	$colors = $('.color'),
+	$userConsole = $('#userConsole')[0],
+	$submitUser = $('#submitUser')[0],
+	$colorSelector = $('#colorSelector')[0],
+	$userHead = $('#userHead')[0],
+	$keyboard = $('#keyboard')[0],
+	$buzzer = $('#buzzButton')[0],
+	$button = $('#activeButton')[0],
+	
+	teamColor = '',
+	name = '';
+	
+	var submitUser = function(){
+		$('#logo')[0].className = 'in';
+		$userConsole.className = 'settled';
+		$userHead.className = teamColor;
+		$keyboard.className = '';
+		$colorSelector.className = 'out';
+		$colorSelector.addEventListener('webkitTransitionEnd', function(){
+			$colorSelector.style.display = 'none';
+			$buzzer.className = 'in';
+		})
+	},
+	
+	enableButton = function(){
+		$button.className = 'enabled';
+		setTimeout(function(){$button.className = 'enabled show';},100);
+	},
+	
+	disableButton = function(){
+		$button.className = 'disabled';
+	}
+	
+	enterChar = function(char){
+		if(char){
+			name = name + char;
+			if(name.length){
+				//if(){
+					$submitUser.addEventListener('click', submitUser);
+					$submitUser.className = '';
+				//}
+				$('#userConsole').removeClass('inactive');
+			}
+		}else if(name.length === 0){
+				$submitUser.className = 'inactive';
+				$userConsole.className = 'inactive';
+				$submitUser.removeEventListener('click', submitUser);
+		}
+		$userConsole.innerHTML = name;
+	};
+	
+	var ch=0;
+	for(var c=0;c<$keys.length;c++){	
+	
+		document.getElementById($keys[c].id).style.webkitTransitionDelay = (20*c)+'ms'; //initial effect
+		$keys[c].className  = 'char';
+		
+		if($keys[c].id !== 'del'){
+			$keys[c].addEventListener('click', function(e){
+				this.style.webkitTransitionDelay = '0ms'; //reset initial effect
+				this.className = 'char pressed';
+				var char = e.target.id.substr(-1);
+				console.log(char);
+				enterChar(char);
+			},false);
+			this.style = '-webkit-transition-delay: '+(c*100)+'ms';
+		}else{
+			$keys[c].addEventListener('click',function(e){
+				this.style.webkitTransitionDelay = '0ms';  //reset initial effect
+				this.className = 'char pressed';
+				name = name.substr(0,name.length-1);
+				enterChar();
+			},false);		
+		}
+		$keys[c].addEventListener('webkitTransitionEnd',function(){
+			this.className = 'char';
+		});
+		
+	};
+	
+	for(var c=0;c<$colors.length;c++){
+
+			$colors[c].addEventListener('click',function(e){
+				color = e.target.id.substr(6,e.target.id.length);
+				$userConsole.className = color;
+				teamColor = color;
+			},false);	
+			console.log($colors[c].id);
+	}
+	
+	enableButton();
+	
+	$button.addEventListener('click', function(){
+		$button.className = 'disabled';
+		setTimeout(function(){
+			$button.className = 'enabled';
+		},2000);
+	});
+	
+}, false);
+</script>
+  
+</body>
+</html>

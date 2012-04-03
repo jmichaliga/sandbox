@@ -1,0 +1,50 @@
+#main {
+  padding-left: 180px;
+}
+
+#header {
+  height: 61px;
+  padding-top: 30px;
+}
+
+#main {
+  min-height: 500px;
+}
+
+.headerlogo {
+  position: absolute;
+  top: -5px;
+  left: 10px;
+}
+
+.headerlogo img {
+  width: 100px;
+  height: 100px;
+}
+
+#pagenav {
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  font-size: large;
+}
+
+#pagenav li {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+#header, .site {
+  margin: 0;
+  width: auto;
+}
+
+#main ul {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.nobullet, .nobullet li {
+  list-style-type: none;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent;}
+/* END Medialets Reset CSS */
+
+    body {
+      background: black;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #container {
+      -webkit-transform-origin: left top;
+         -moz-transform-origin: left top;
+           -o-transform-origin: left top;
+              transform-origin: left top;
+    }
+    
+    .pixel {
+      float: left;
+      width: 1px;
+      height: 1px;
+      -webkit-transition: background-color 2s linear;
+         -moz-transition: background-color 2s linear;
+           -o-transition: background-color 2s linear;
+              transition: background-color 2s linear;
+    }
+    
+	#bg{position: absolute; height: 400px; width: 500px;}
+	#fg{position: absolute; height: 400px; width: 500px; background: transparent url('holes.png') no-repeat;
+	   z-index: 5;
+	   width: 500px;
+       height: 400px;
+       overflow: hidden;
+}
+</style>
+</head>
+
+<body>
+
+		
+		<div id="bg"></div>
+		<div id="fg"></div>
+
+
+<script type="text/javascript" charset="utf-8">
+
+  function init() {
+    var container = document.createElement('div'),
+        cols = 4,
+        transitionDuration = 2,
+        width = 500;//window.innerWidth,
+        scale = width / cols,
+        //rows = Math.ceil( window.innerHeight / scale ) + 1,
+        rows = Math.ceil(400/scale)+1,
+        fragment = document.createDocumentFragment(),
+        transform2d = 'scale('+ scale + ') translate(-0.5px, -0.5px)';
+    
+    container.id = 'container';
+    container.style.width = (cols + 1) + 'px';
+    container.style.height = '400px';
+    container.style.WebkitTransform = 'scale3d('+ scale + ', '+ scale + ', 1) translate(-0.5px, -0.5px)';
+    // container.style.WebkitTransform = transform2d;
+    container.style.MozTransform = transform2d;
+    container.style.OTransform = transform2d;
+    container.style.transform = transform2d;
+    
+    var pixelCount = (cols+1) * rows,
+        i = pixelCount,
+        pixels = [];
+    while (i--) {
+      var pixel = document.createElement('div'),
+          delay = ~~(Math.random() * transitionDuration * 1000)  + 'ms';
+      pixel.className = 'pixel';
+      pixels.push( pixel );
+      pixel.style.WebkitTransitionDelay = delay;
+      pixel.style.MozTransitionDelay = delay;
+      pixel.style.OTransitionDelay = delay;
+      pixel.style.transitionDelay = delay;
+      fragment.appendChild( pixel );
+    }
+    
+    container.appendChild( fragment );
+    
+    document.body.appendChild( container );
+    
+    var ncludColors = '#003245 #00384C #09455C #01445C #003245 #00384C #09455C #01445C #0076A4'.split(' '),
+        grays = '#999 #DDDDDD #EEEEEE'.split(' '),
+        samsungs = '#00FF00 #FF00FF #FFF #FF0 #8dabcd #0f3054'.split(' '),
+        colors = samsungs,
+        colorsLen = colors.length;
+    
+    var changeColors = function() {
+      var i = pixels.length,
+          hue;
+      while (i--) {
+        pixels[i].style.backgroundColor = colors[ ~~( Math.random() * colorsLen ) ];
+      }
+    };
+    
+    changeColors();
+    
+    var t = 0
+    function animate() {
+      changeColors();
+      setTimeout( animate, transitionDuration * 1000 )
+    };
+    setTimeout( animate, 10 )
+  }
+  
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	
+	init();
+
+	// prevent the viewport from moving on touch/drag
+	document.addEventListener('touchmove', function(e) { e.preventDefault(); });
+}, false);
+</script>
+  
+</body>
+</html>

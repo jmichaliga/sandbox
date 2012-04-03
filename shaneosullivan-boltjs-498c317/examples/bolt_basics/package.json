@@ -1,0 +1,12 @@
+{
+  "bolt_build_manifest" : [
+    {
+      "sources": [
+        "css",
+        ["", "js"]
+      ],
+      "package_target": "pkg",
+      "package_name": "bolt_basics"
+    }
+  ]
+}

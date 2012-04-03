@@ -1,0 +1,144 @@
+---
+title: Event Handling
+section: view
+layout: default
+---
+
+<h1>Event Handling</h1>
+
+<p>
+  All Bolt <b>View</b>s have a <b>listen</b> method which can be used to listen for both DOM and custom events.  Simply pass the event name and the function callback.  The callback can be either a function or a string, in which case it is the name of a function on the <b>View</b>s owner.  (For more information on the Owner concept, see <a href="view_building.html">Building Views</a>.
+</p>
+
+<p>
+  The example below shows the case where the listen function is passed a function.  Note that the event name does not contain 'on', this is important.  The <b>event</b> parameter passed to the callback is a <a href="http://javelinjs.com">Javelin</a> event, not a standard DOM event.  This provides a number of extra functions that you can see in the <a href="http://www.phabricator.com/docs/javelin/class/JX.Event.html">Javelin Docs</a>.  To get the original DOM event, call <b>event.getRawEvent()</b>.
+</p>
+
+{% highlight javascript %}
+  var Button = require('views/Button').Button;
+  var myButton = new Button();
+  myButton.listen('mouseover', function(event) {
+    console.log('mouseover event');
+  });
+{% endhighlight %}
+
+<h2>Using the Builder</h2>
+
+<p>
+  It is also possible to attach events when using the <a href="view_building.html">Builder</a>.  Any property set on a view passed the Builder that starts with <b>on</b> is assumed to be an event and is listened to.  The example below shows a simple version of this in use.  Note that unlike when calling the <b>listen</b> method directly, the event name begins with <b>on</b>.
+</p>
+
+{% highlight javascript %}
+  var Button = require('views/Button').Button;
+  var myButton = builder.build({
+    view: Button,
+    onmouseover: function(event) {
+      console.log('mouseover event');
+    }
+  });
+{% endhighlight %}
+
+<h2>Events in the Owner</h2>
+
+<p>
+  Bolt provides a clean way of organizing event listeners when composing hierarchies of views.  Rather than pass an actual function as a listener, instead pass the string name of a function in that views <b>owner</b> (see <a href="view_building.html">Building Views</a> for an explanation of the owner concept).  This makes for a more readable view hierarchy declaration, as you don't have to pass actual functions, bind them to the view etc.
+</p>
+
+{% highlight javascript %}
+var Container = require('container').Container;
+
+require('javelin/core').createClass({
+  name : 'MyOwnerContainer',
+
+  extend: Container,
+
+  members: {
+    render: function() {
+      this.setLayout({
+        content: "Hello World!",
+        ref: "myInnerView",
+
+        // Add two listeners, passing the names of the functions that will handle their events
+        ontouchstart: "handleTouchStart",
+        ontouchend: "handleTouchEnd"
+      });
+    },
+
+    // Handler for the touch start event
+    handleTouchStart: function(event) {
+      this.refs.myInnerView.setContent("That tickles!!");
+    },
+
+    // Handler for the touch end event
+    handleTouchEnd: function(event) {
+      this.refs.myInnerView.setContent("Touch me again and I'll .....");
+    }
+  }
+});
+
+{% endhighlight %}
+
+<h2>Defining Custom Events</h2>
+
+<p>
+  In order for a View to communicate with it's owner, it can define custom events, separate from DOM events.  To do this, declare the events that it will fire in an array, e.g.
+</p>
+
+{% highlight javascript %}
+
+var SubView = core.createClass({
+  name: 'SubView',
+
+  events: ['doSomething', 'doSomethingElse'],
+
+  members: {
+    render: function() {
+      this.setLayout({
+        ontouchstart: 'fireSmth',
+        ontouchend: 'fireSmthElse'
+      });
+    },
+
+    fireSmth: function() {
+      this.invoke('doSomething', {someData: 'is put here'});
+    },
+
+    fireSmthElse: function() {
+      this.invoke('doSomethingElse', {someOtherData: 'isPutHere'});
+    }
+  }
+});
+
+{% endhighlight %}
+
+<p>
+  Then a parent view can listen for these events by creating a parameter name <b>on</b> + <b>name of event</b>, e.g.
+</p>
+
+{% highlight javascript %}
+
+  var ParentView = core.createClass({
+    name: 'OwnerView',
+
+    members: {
+      render: function() {
+        this.setLayout({
+          view: 'SubView',
+          ondoSomething: 'handleSmth',
+          ondoSomethingElse: 'handleSmthElse'
+        });
+
+      },
+
+      handleSmth: function(event) {
+        console.log('Got the doSomething event', event);
+      },
+    
+      handleSmthElse: function(event) {
+        console.log('GOt the doSomethingElse event', event);
+      }
+    }
+  });
+
+{% endhighlight %}
+

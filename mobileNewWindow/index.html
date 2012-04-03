@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent;}
+/* END Medialets Reset CSS */
+
+#container{position:absolute; width: 320px; height: 480px; background-color: red;}
+
+</style>
+</head>
+
+<body>
+    <div id="container">
+
+	</div>
+	<!--/container-->
+
+
+<script type="text/javascript" charset="utf-8">
+window.addEventListener('load', function() {
+	
+	document.addEventListener('click', function(){
+		window.open('http://m.espn.go.com');
+	});
+	
+	// prevent the viewport from moving on touch/drag
+	document.addEventListener('touchmove', function(e) { e.preventDefault(); });
+}, false);
+</script>
+  
+</body>
+</html>

@@ -110,10 +110,5 @@ $(function(){
 		}
 	});
 	
-	/* Just for fun 
-	if(!touch) {
-		$('#cube > div').eq(2).html('<object width="360" height="360"><param name="movie" value="http://www.youtube.com/v/01hUyIrubWE?fs=1&amp;hl=en_GB&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/01hUyIrubWE?fs=1&amp;hl=en_GB&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="360" height="360"></embed></object>');
-	}
-	*/
 	
 });

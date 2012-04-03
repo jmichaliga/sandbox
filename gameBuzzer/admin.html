@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent;}
+/* END Medialets Reset CSS */
+
+#container{position: absolute; height: 768px; width: 1024px; 
+	background: #111 url('black-Linen.png'); 
+	font-family: "Helvetica Neue"; font-size: 1.5em; text-transform: uppercase;
+	font-weight: bolder; color: #000;overflow: hidden;}
+
+	#logo{position: absolute; width: 79px;height: 144px; background: url('logo.png') no-repeat; opacity: 1; left: 60px; top: 20px;}
+		#logo.in{-webkit-transition-duration: 1s; opacity: 1;}
+
+	#userGrid{position:absolute; width: 768px; left: 200px; background-color: transparent; }
+		
+		.user.red{background-color: red;}
+		.user.blue{background-color: blue; color: #FFF;}
+		.user.limegreen{background-color: limegreen;}
+		.user.yellow{background-color: yellow;}
+		.user.violet{background-color: violet;}
+		.user.orange{background-color: orange;}
+
+
+	.user{float: left; margin: 6px 0px 0px 6px; height: 28px; font-size: 0.9em;
+		border-radius: 3px; background-color: #00c445; color: #000;
+		-webkit-box-shadow: 1px 1px 3px #000;
+		-webkit-transition-duration: 250ms; -webkit-transform: scale(1);
+		padding: 5px; text-align: center; opacity: 0.4;}
+		.user.out{-webkit-transform: scale(0.01);}
+		.user.highlight{-webkit-transform: scale(1) translate3d(0,0,1px); z-index: 10; opacity: 1;}
+		.user.winner{-webkit-transform: scale(1.5) translate3d(0,0,1px); z-index: 10; opacity: 1;}
+		
+
+	#controls{position: absolute; width: 185px; height: 400px; top: 185px; left: 10px; color: #FFF; font-size: 14px;}
+		.label{float: left; width: 100%;}
+		.button{float: left; width: 100%; margin-bottom: 10px; height: 55px; background: grey; text-align: center; 
+			line-height: 2em; font-size: 2em; color: #000; border-radius: 3px;-webkit-box-shadow: 1px 1px 3px #000;}
+		.break{float: left; height: 50px; width:100%;}
+		
+</style>
+</head>
+
+<body>
+    <div id="container">
+
+	<div id="logo"></div>
+
+	<div id="controls">
+		<div class="label">Actions:</div>
+		<div id="restart-server" class="button">Restart</div>
+		<div id="next-question" class="button">New</div>
+		<div class="break"></div>
+		<div class="label">Filters:</div>
+		<div id="alphabet-filter" class="button">ABC</div>
+		<div id="group-filter" class="button">
+			<div style="position: relative; left: 80px; top: 10px; width: 50px; height: 30px; ">
+				<div style="position:absolute; width: 5px; height: 20px; bottom: 0px; background: black;"></div>
+				<div style="position:absolute; width: 5px; height: 15px; left: 9px; bottom: 0px;background: black;"></div>
+				<div style="position:absolute; width: 5px; height: 10px; left: 18px; bottom: 0px; background: black;"></div>			
+			</div>
+		</div>
+		<div id="points-filter" class="button"><strong>&uarr;</strong></div>
+	</div>
+	<div id="userGrid" class="in">
+	
+	</div><!--/userGrid-->
+
+	</div>
+	<!--/container-->
+<script src="zepto.min.js"></script>
+<script type="text/javascript" userset="utf-8">
+
+window.addEventListener('load', function() {
+	
+	$userGrid = $('#userGrid')[0];
+
+	people = ["Suzy Wolfson", "Shaun Choo", "Andrew Dryden", "Nelson Lopez", "Danish Shah", "Pinar O'Flaherty", "Morrison Chang", "Kevin Whitaker", "Rich Couzzi", "Matt Unhjem", "Andrew Eisele", "Corey Ciotti", "Ryan Petrich", "Brittney Summers", "John Purcell", "Lisa Dargie", "Paulina Riera", "Mason Levey", "Ali Hasan", "Justin Michaliga", "Kevin Stetter", "John Flood", "Natasha Gross", "Andrew Breen", "Keith Gelles", "Joseph Lospalluto", "Hayley Crowell", "Margaret Emerson", "Caitlin Perry", "Sam Liu", "DeAnna Caggiano", "Rodney Jean-Baptiste", "Nicole Amodeo", "Trisha Tomaszewski", "Erik Greenberger", "Caroline Valdini", "David Scatterday", "Jef Davis", "Sally Sullivan", "Seth Abbott", "Kate Pace", "Anthony Acquanita", "Eric Litman", "Sarah Nagle", "Christina Piotti", "Ray Matos", "Joe Stein", "Liza West", "Theo Skye", "Bayaar Lo-Borjiged", "Elena Perez", "Steven Scally", "Aaron Mittman", "Jonathan Chin", "Ted Davis", "Mathew Adams"];
+	
+	colors = ['red','blue','limegreen','yellow','violet','orange'];
+	
+	applyPeople = function(){
+	
+		$users = $('.user'),
+		var ch=0;
+		first = true;
+		for(var c=0;c<=$users.length-1;c++){	
+		
+			document.getElementById($users[c].id).style.webkitTransitionDelay = (20*c)+'ms'; //initial effect
+
+			$users[c].className  = 'user '+colors[Math.floor(Math.random()*colors.length)];
+			
+			$users[c].addEventListener('click', function(e){
+				this.style.webkitTransitionDelay = '0ms'; //reset initial effect
+				if(first){
+					this.className = this.className+' winner';
+					first=false;
+				}else{
+					this.className = this.className+' highlight';
+				}
+				var user = e.target.id.substr(-1);
+				console.log(user);
+			},false);
+			this.style = '-webkit-transition-delay: '+(c*100)+'ms';
+			
+			$users[c].addEventListener('webkitTransitionEnd',function(){
+				var _this = this;
+				setTimeout(function(){
+					_this.className = _this.className.replace(' highlight','');
+				},2000);
+			});
+		};	
+	},
+	
+	generatePeople = function(){
+		for(p=0;p<=people.length;p++){
+			var $p = document.createElement('div');
+			$p.id = 'user-'+p;
+			$p.className = 'user out';
+			$p.innerHTML = people[p];
+			$userGrid.appendChild($p);
+		}
+		setTimeout(applyPeople,1000);
+	}();
+
+	
+}, false);
+</script>
+  
+</body>
+</html>

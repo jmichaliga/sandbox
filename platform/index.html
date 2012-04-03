@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+<style type="text/css">
+/* Begin Medialets Reset CSS */
+* {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent;}
+/* END Medialets Reset CSS */
+
+</style>
+</head>
+
+<body>
+    <div id="container">
+			#%@#%@
+	</div>
+	<!--/container-->
+<script type="text/javascript" src="browser.js"></script>
+<script type="text/javascript" charset="utf-8">
+window.addEventListener('load', function() {
+	
+	var d = document,
+	platform,
+	versionNo;
+	
+	parts = navigator.userAgent.split(/\s*[;)(]\s*/);
+	if (/^Linux/.test(parts[3])){
+	   versionNo = parts[6].split("/").pop(); // "8.10" (Ubuntu)
+	}else{
+	   versionNo = parts[3].split(" ").pop(); // "6.1" (Win 7)
+	   platform = parts[3].split(" ").shift();
+	}
+	
+	mainVersion = versionNo.split('.')[0];
+	
+	d.getElementById('container').innerHTML = navigator.userAgent+'<br/>'+platform +' - '+versionNo+' - '+mainVersion;
+
+}, false);
+</script>
+  
+</body>
+</html>
