@@ -153,6 +153,7 @@ window.addEventListener('load', function() {
 	},
 	
 	handleMove = function(e){
+		console.log(e);
 		if(mD && e.pageX > l && e.pageY > t){
 			w = e.pageX - l;
 			h = e.pageY - t;
@@ -165,7 +166,7 @@ window.addEventListener('load', function() {
 			document.addEventListener('mouseup', handleUp);
 		}else{
 			$iC.className = 'active';
-			initMove();
+			initMove(e);
 		}
 	},
 	
